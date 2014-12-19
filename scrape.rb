@@ -10,8 +10,9 @@ URL = "http://www.energyglobe.at/awards/"
 class AwardsScraper
   attr_reader :doc
 
-  def initialize url
+  def initialize url, cache=nil
     @url = url
+    @cache = cache
   end
 
   def scrape
@@ -27,9 +28,13 @@ class AwardsScraper
   private
 
   def get_response_body
-    req = RequestCache.new(@url)
-    res = req.fetch
-    res.body
+    if @cache
+      Marshal.load(@cache).body
+    else
+      req = RequestCache.new(@url)
+      res = req.fetch
+      res.body
+    end
   end
 end
 
@@ -102,11 +107,12 @@ end
 
 describe "Award" do
   before {
-    scraper = AwardsScraper.new(URL)
+    scraper = AwardsScraper.new(nil, File.read('./spec/fixtures/request_cache_sample'))
     @awards = scraper.scrape
+    @award = @awards.first
   }
 
   it "should get the title" do
-    @awards.first.title.must_equal "Sägespäne aus Brennstoff zum Kochen und Heizen"
+    @award.title.must_equal "Sägespäne aus Brennstoff zum Kochen und Heizen"
   end
 end
