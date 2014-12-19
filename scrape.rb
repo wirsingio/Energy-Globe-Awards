@@ -112,7 +112,8 @@ describe "Award" do
     @award = @awards.first
   }
 
-  it "should get the title" do
+  it "retreives basic award attributes" do
     @award.title.must_equal "Sägespäne aus Brennstoff zum Kochen und Heizen"
+    @award.year.must_equal "2007"
   end
 end
