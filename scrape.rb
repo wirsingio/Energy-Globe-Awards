@@ -33,24 +33,6 @@ class AwardsScraper
   end
 end
 
-class Award
-  attr_reader :year, :title, :organization, :category,
-              :award, :country, :submitter, :description, :images
-
-  def initialize row
-    @row = row
-  end
-
-  def parse
-    @title = get_title
-  end
-
-  private
-
-  def get_title
-  end
-end
-
 class RequestCache
   CACHEFILE = "./.request_cache"
   # expire after one day
@@ -88,6 +70,31 @@ class RequestCache
   end
 end
 
+class Award
+  attr_reader :year, :title, :organization, :category,
+              :award, :country, :submitter, :description, :images
+
+  def initialize row
+    @row = row
+  end
+
+  def parse
+    @title = get_title
+    @year = get_year
+  end
+
+  private
+
+  def get_title
+    td = @row.css('td')[1]
+    td.at_css('a').text
+  end
+
+  def get_year
+    @row.at_css('td').text
+  end
+end
+
 def main
   scraper = AwardsScraper.new(URL)
   puts scraper.scrape
@@ -100,6 +107,6 @@ describe "Award" do
   }
 
   it "should get the title" do
-    @awards.first.title.must_equal "foo"
+    @awards.first.title.must_equal "Sägespäne aus Brennstoff zum Kochen und Heizen"
   end
 end
