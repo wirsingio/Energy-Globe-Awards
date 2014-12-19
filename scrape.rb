@@ -91,6 +91,17 @@ class Award
     @organization = get_org
     @details_link = get_link
     @category = get_category
+    @award_won = won?
+    @award_title = get_award_title
+    @country = get_country
+    @description = get_description
+  end
+
+  def won?
+    @award_won ||= begin
+      td = td_at(4)
+      !!td.text.match(/winner/i)
+    end
   end
 
   private
@@ -118,6 +129,27 @@ class Award
     text.downcase if text
   end
 
+  def get_award_title
+    td = td_at(4)
+    winner_span = td.at_css('span')
+    if winner_span
+      td_text = td.text
+      td_text.sub(/#{winner_span.text}$/, '')
+    else
+      td.text
+    end
+  end
+
+  def get_country
+    td_at(-1).text
+  end
+
+  def get_description
+    td = td_at(1)
+    desc_element = td.at_css("span")
+    desc_element.text
+  end
+
   def td_at(n)
     @row.css('td')[n]
   end
@@ -135,7 +167,7 @@ describe "Award" do
     @award = @awards.first
   }
 
-  it "retreives basic award attributes" do
+  it "retreives basic award attributes from list page" do
     @award.title.must_equal(
       "Sägespäne aus Brennstoff zum Kochen und Heizen")
     @award.year.must_equal "2007"
@@ -145,8 +177,6 @@ describe "Award" do
     @award.award_won.must_equal true
     @award.award_title.must_equal "National 2008"
     @award.country.must_equal "Ghana"
-    @award.description.must_equal <<-DESC
-Ziel des Projektes ist es, den Verbrauch von Feuerholz f&uuml;r Kochen und Heizung zu verringern indem S&auml;gesp&auml;ne als Brennstoff verwendet, um den Wald in Ghana zu sch&uuml;tzen. Der Gro&szlig;teil der l&auml;ndlichen Bev&ouml;lkerung in Ghana ist durch die hohe Armut auf das Holz als Energietr&auml;ger angewiesen. Der hohe Bedarf f&uuml;hrt jedoch zur Entwaldung und Verw&uuml;stung des Landes. Die Regierung hatte schon Programme gestartet, die Energieversorgung auf Gas umzustellen, dies scheiterte jedoch auf Grund der hohen Armut in Ghana.
-DESC
+    @award.description.must_equal %Q{Ziel des Projektes ist es, den Verbrauch von Feuerholz für Kochen und Heizung zu verringern indem Sägespäne als Brennstoff verwendet, um den Wald in Ghana zu schützen. Der Großteil der ländlichen Bevölkerung in Ghana ist durch die hohe Armut auf das Holz als Energieträger angewiesen. Der hohe Bedarf führt jedoch zur Entwaldung und Verwüstung des Landes. Die Regierung hatte schon Programme gestartet, die Energieversorgung auf Gas umzustellen, dies scheiterte jedoch auf Grund der hohen Armut in Ghana.}
   end
 end
