@@ -77,7 +77,8 @@ end
 
 class Award
   attr_reader :year, :title, :organization, :category,
-              :award, :country, :submitter, :description, :images,
+              :award_won, :award_title,
+              :country, :submitter, :description, :images,
               :details_link
 
   def initialize(row)
@@ -88,6 +89,8 @@ class Award
     @title = get_title
     @year = get_year
     @organization = get_org
+    @details_link = get_link
+    @category = get_category
   end
 
   private
@@ -103,6 +106,16 @@ class Award
 
   def get_org
     td_at(2).text
+  end
+
+  def get_link
+    td = td_at(1)
+    td.at_css('a')['href']
+  end
+
+  def get_category
+    text = td_at(3).text
+    text.downcase if text
   end
 
   def td_at(n)
