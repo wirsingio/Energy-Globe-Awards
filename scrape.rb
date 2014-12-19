@@ -45,47 +45,6 @@ class AwardsScraper
   end
 end
 
-class CachedRequest
-  CACHEDIR = "./tmp/cache"
-  # expire after one day
-  FRESHTIME = ->(){ 60 * 60 * 24 }
-
-  def initialize url
-    @url = url
-  end
-
-  def fetch
-    if raw = read_cache_file
-      Marshal.load(raw)
-    else
-      make_and_cache_request
-    end
-  end
-
-  def cache_filepath
-    "%s/%s.cache" % [CACHEDIR, Digest::MD5.hexdigest(@url)]
-  end
-
-  private
-
-  def read_cache_file
-    if File.exists?(cache_filepath) && file_is_fresh?
-      File.read(cache_filepath)
-    end
-  end
-
-  def file_is_fresh?
-    (Time.now - File.stat(cache_filepath).mtime).to_f < FRESHTIME.call
-  end
-
-  def make_and_cache_request
-    res = Typhoeus::Request.get(@url)
-    serialized = Marshal.dump(res)
-    File.open(cache_filepath, "w") { |f| f.write(serialized) }
-    res
-  end
-end
-
 class Award
   attr_reader :year, :title, :organization, :category,
               :details, :details_link,
@@ -207,6 +166,48 @@ class Award
     @row.css('td')[n]
   end
 end
+
+class CachedRequest
+  CACHEDIR = "./tmp/cache"
+  # expire after one day
+  FRESHTIME = ->(){ 60 * 60 * 24 }
+
+  def initialize url
+    @url = url
+  end
+
+  def fetch
+    if raw = read_cache_file
+      Marshal.load(raw)
+    else
+      make_and_cache_request
+    end
+  end
+
+  def cache_filepath
+    "%s/%s.cache" % [CACHEDIR, Digest::MD5.hexdigest(@url)]
+  end
+
+  private
+
+  def read_cache_file
+    if File.exists?(cache_filepath) && file_is_fresh?
+      File.read(cache_filepath)
+    end
+  end
+
+  def file_is_fresh?
+    (Time.now - File.stat(cache_filepath).mtime).to_f < FRESHTIME.call
+  end
+
+  def make_and_cache_request
+    res = Typhoeus::Request.get(@url)
+    serialized = Marshal.dump(res)
+    File.open(cache_filepath, "w") { |f| f.write(serialized) }
+    res
+  end
+end
+
 
 class JSONWriter
   def initialize(awards, data_path)
