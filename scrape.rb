@@ -222,9 +222,7 @@ class JSONWriter
   end
 
   def serialize_list
-    @awards.map { |award|
-      award.to_json
-    }
+    @awards.map { |award| award.to_json }
   end
 end
 
@@ -234,7 +232,7 @@ def main
   scraper.scrape_awards
   puts "Scraping Details..."
   scraper.request_award_details
-  writer = JSONWriter.new(scrape.awards, DATAPATH)
+  writer = JSONWriter.new(scraper.awards, DATAPATH)
   puts "Writing json file to #{DATAPATH}..."
   writer.write!
   puts "Done..."
