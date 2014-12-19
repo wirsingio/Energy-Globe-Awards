@@ -77,7 +77,8 @@ end
 
 class Award
   attr_reader :year, :title, :organization, :category,
-              :award, :country, :submitter, :description, :images
+              :award, :country, :submitter, :description, :images,
+              :details_link
 
   def initialize row
     @row = row
@@ -86,6 +87,7 @@ class Award
   def parse
     @title = get_title
     @year = get_year
+    @organization = get_org
   end
 
   private
@@ -96,7 +98,15 @@ class Award
   end
 
   def get_year
-    @row.at_css('td').text
+    td_at(0).text
+  end
+
+  def get_org
+    td_at(2).text
+  end
+
+  def td_at n
+    @row.css('td')[n]
   end
 end
 
@@ -117,7 +127,7 @@ describe "Award" do
       "Sägespäne aus Brennstoff zum Kochen und Heizen")
     @award.year.must_equal "2007"
     @award.organization.must_equal "Bikat Company Limited"
-    @award.link.must_equal "/awards/details/awdid/9253/"
+    @award.details_link.must_equal "/awards/details/awdid/9253/"
     @award.category.must_equal "fire"
     @award.award_won.must_equal true
     @award.award_title.must_equal "National 2008"
