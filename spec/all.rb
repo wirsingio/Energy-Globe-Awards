@@ -1,16 +1,21 @@
-require_relative "../scrape"
+$:.unshift File.expand_path('../../lib', __FILE__)
+require 'energy_globe_awards'
+
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/pride'
 require 'minitest/focus'
 
+BASEURL   = "http://www.energyglobe.at"
+AWARDSURL = "%s/awards/" % BASEURL
+DATAPATH  = File.expand_path "../../data/awards.json", __FILE__
+
 describe "Award" do
   before {
     cache_file = File.expand_path('../fixtures/request_cache_sample', __FILE__)
     scraper = AwardsScraper.new(BASEURL, nil, File.read(cache_file))
-    binding.pry
-    @awards = scraper.scrape_awards
-    @award = @awards.first
+    scraper.scrape_awards
+    @award = scraper.awards.first
   }
 
   it "retreives basic award attributes from list page" do

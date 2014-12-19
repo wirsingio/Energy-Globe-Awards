@@ -1,0 +1,5 @@
+require 'bundler/setup'
+require 'energy_globe_awards/awards_scraper'
+require 'energy_globe_awards/award'
+require 'energy_globe_awards/cached_request'
+require 'energy_globe_awards/json_writer'

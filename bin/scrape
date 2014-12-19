@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.expand_path('../../lib', __FILE__)
+require 'energy_globe_awards'
+
+BASEURL   = "http://www.energyglobe.at"
+AWARDSURL = "%s/awards/" % BASEURL
+DATAPATH  = File.expand_path "../../data/awards.json", __FILE__
+
+def main
+  scraper = AwardsScraper.new(BASEURL, AWARDSURL)
+  puts "Scraping..."
+  scraper.scrape_awards
+  puts "Scraping Details..."
+  scraper.request_award_details
+  writer = JSONWriter.new(scraper.awards, DATAPATH)
+  puts "Writing json file to #{DATAPATH}..."
+  writer.write!
+  puts "Done..."
+end
+
+main
