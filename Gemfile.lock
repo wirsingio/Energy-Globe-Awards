@@ -7,6 +7,9 @@ GEM
     ffi (1.9.6)
     method_source (0.8.1)
     mini_portile (0.6.1)
+    minitest (5.5.0)
+    minitest-focus (1.1.0)
+      minitest (>= 4, < 6)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     pry (0.9.12)
@@ -22,6 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  minitest-focus
   nokogiri
   pry
   rake

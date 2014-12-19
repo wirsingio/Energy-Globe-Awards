@@ -1,10 +1,10 @@
-require 'typhoeus'
-require 'nokogiri'
-require 'pry'
+require 'bundler/setup'
+Bundler.require
 require 'digest'
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/pride'
+require 'minitest/focus'
 
 BASEURL   = "http://www.energyglobe.at"
 AWARDSURL = "%s/awards/" % BASEURL
@@ -86,7 +86,7 @@ class Award
   attr_reader :year, :title, :organization, :category,
               :details, :details_link,
               :award_won, :award_title,
-              :country, :submitter, :description, :images
+              :country, :description
 
   def initialize(row, base_url)
     @row = row
@@ -111,6 +111,17 @@ class Award
     @award_title = get_award_title
     @country = get_country
     @description = get_description
+  end
+
+  def images
+    return @images if @images
+    if details
+      if slides = @details.at_css(".slides_container")
+        images = slides.css('img')
+        return images.map { |img| "%s%s" % [@base_url, img['src']] if img }.compact
+      end
+    end
+    return []
   end
 
   def won?
@@ -196,8 +207,23 @@ describe "Award" do
     @award.description.must_equal %Q{Ziel des Projektes ist es, den Verbrauch von Feuerholz für Kochen und Heizung zu verringern indem Sägespäne als Brennstoff verwendet, um den Wald in Ghana zu schützen. Der Großteil der ländlichen Bevölkerung in Ghana ist durch die hohe Armut auf das Holz als Energieträger angewiesen. Der hohe Bedarf führt jedoch zur Entwaldung und Verwüstung des Landes. Die Regierung hatte schon Programme gestartet, die Energieversorgung auf Gas umzustellen, dies scheiterte jedoch auf Grund der hohen Armut in Ghana.}
   end
 
-  it "gets information from the details page" do
-    details = @award.get_details
-    details.to_s.must_match "Bikat Company Limited"
+  describe "details" do
+    let(:details) { @award.get_details }
+
+    it "gets information from the details page" do
+      details.to_s.must_match "Bikat Company Limited"
+    end
+
+    focus
+    it "retreives images" do
+      award_with_images = @awards.last
+      award_with_images.get_details
+      images = award_with_images.images
+      images.size.must_equal 5
+    end
+
+    it "returns empty array when no images" do
+      @award.images.must_equal []
+    end
   end
 end
