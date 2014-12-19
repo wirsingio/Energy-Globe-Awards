@@ -3,6 +3,7 @@ require 'nokogiri'
 require 'pry'
 require 'minitest/autorun'
 require 'minitest/spec'
+require 'minitest/pride'
 
 URL = "http://www.energyglobe.at/awards/"
 
@@ -33,14 +34,20 @@ class AwardsScraper
 end
 
 class Award
-  attr_reader :jahr, :titel, :organisation, :kategorie,
-              :award, :land, :einreicher, :inhalt, :bilder
+  attr_reader :year, :title, :organization, :category,
+              :award, :country, :submitter, :description, :images
 
   def initialize row
     @row = row
   end
 
   def parse
+    @title = get_title
+  end
+
+  private
+
+  def get_title
   end
 end
 
