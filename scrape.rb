@@ -1,16 +1,14 @@
 require 'bundler/setup'
 Bundler.require
 require 'digest'
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'minitest/pride'
-require 'minitest/focus'
+require 'json'
 
 BASEURL   = "http://www.energyglobe.at"
 AWARDSURL = "%s/awards/" % BASEURL
+DATAPATH  = "./data/awards.json"
 
 class AwardsScraper
-  attr_reader :doc
+  attr_reader :doc, :awards
 
   def initialize(base_url, awards_url, cache=nil)
     @awards_url = awards_url
@@ -18,14 +16,20 @@ class AwardsScraper
     @cache      = cache
   end
 
-  def scrape
+  def scrape_awards
     body = get_response_body
     @doc = Nokogiri::HTML(body)
-    @doc.css("tr")[1..-1].map { |row|
+    @awards = @doc.css("tr")[1..-1].map { |row|
       award = Award.new(row, @base_url)
       award.parse
       award
     }
+  end
+
+  def request_award_details
+    @awards.each do |award|
+      award.get_details
+    end
   end
 
   private
@@ -96,9 +100,16 @@ class Award
   def get_details
     link = get_link
     url = "%s%s" % [@base_url, link]
-    res = CachedRequest.new(url)
-    body = res.fetch.body
-    @details = Nokogiri::HTML(body)
+    req = CachedRequest.new(url)
+    puts "Requesting award at #{url}"
+    res = req.fetch
+    if res.code == 200
+      puts "Request successful..."
+      body = res.body
+      @details = Nokogiri::HTML(body)
+    else
+      puts "Request failed..."
+    end
   end
 
   def parse
@@ -129,6 +140,21 @@ class Award
       td = td_at(4)
       !!td.text.match(/winner/i)
     end
+  end
+
+  def to_json
+    {
+      title: title,
+      year: year,
+      organization: organization,
+      details_link: details_link,
+      category: category,
+      award_won: won?,
+      award_title: award_title,
+      country: country,
+      description: description,
+      images: images
+    }
   end
 
   private
@@ -182,48 +208,35 @@ class Award
   end
 end
 
+class JSONWriter
+  def initialize(awards, data_path)
+    @awards = awards
+    @data_path = data_path
+  end
+
+  def write!
+    data = serialize_list
+    raw = JSON.dump(data)
+    File.open(@data_path, 'w') { |f| f.write(raw) }
+  end
+
+  def serialize_list
+    @awards.map { |award|
+      award.to_json
+    }
+  end
+end
+
 def main
-  scraper = AwardsScraper.new(AWARDSURL, BASEURL)
-  puts scraper.scrape
+  scraper = AwardsScraper.new(BASEURL, AWARDSURL)
+  puts "Scraping..."
+  scraper.scrape_awards
+  puts "Scraping Details..."
+  scraper.request_award_details
+  writer = JSONWriter.new(scrape.awards, DATAPATH)
+  puts "Writing json file to #{DATAPATH}..."
+  writer.write!
+  puts "Done..."
 end
 
-describe "Award" do
-  before {
-    scraper = AwardsScraper.new(BASEURL, nil, File.read('./spec/fixtures/request_cache_sample'))
-    @awards = scraper.scrape
-    @award = @awards.first
-  }
-
-  it "retreives basic award attributes from list page" do
-    @award.title.must_equal(
-      "Sägespäne aus Brennstoff zum Kochen und Heizen")
-    @award.year.must_equal "2007"
-    @award.organization.must_equal "Bikat Company Limited"
-    @award.details_link.must_equal "/awards/details/awdid/9253/"
-    @award.category.must_equal "fire"
-    @award.award_won.must_equal true
-    @award.award_title.must_equal "National 2008"
-    @award.country.must_equal "Ghana"
-    @award.description.must_equal %Q{Ziel des Projektes ist es, den Verbrauch von Feuerholz für Kochen und Heizung zu verringern indem Sägespäne als Brennstoff verwendet, um den Wald in Ghana zu schützen. Der Großteil der ländlichen Bevölkerung in Ghana ist durch die hohe Armut auf das Holz als Energieträger angewiesen. Der hohe Bedarf führt jedoch zur Entwaldung und Verwüstung des Landes. Die Regierung hatte schon Programme gestartet, die Energieversorgung auf Gas umzustellen, dies scheiterte jedoch auf Grund der hohen Armut in Ghana.}
-  end
-
-  describe "details" do
-    let(:details) { @award.get_details }
-
-    it "gets information from the details page" do
-      details.to_s.must_match "Bikat Company Limited"
-    end
-
-    focus
-    it "retreives images" do
-      award_with_images = @awards.last
-      award_with_images.get_details
-      images = award_with_images.images
-      images.size.must_equal 5
-    end
-
-    it "returns empty array when no images" do
-      @award.images.must_equal []
-    end
-  end
-end
+main
