@@ -10,7 +10,7 @@ URL = "http://www.energyglobe.at/awards/"
 class AwardsScraper
   attr_reader :doc
 
-  def initialize url, cache=nil
+  def initialize(url, cache=nil)
     @url = url
     @cache = cache
   end
@@ -80,7 +80,7 @@ class Award
               :award, :country, :submitter, :description, :images,
               :details_link
 
-  def initialize row
+  def initialize(row)
     @row = row
   end
 
@@ -105,7 +105,7 @@ class Award
     td_at(2).text
   end
 
-  def td_at n
+  def td_at(n)
     @row.css('td')[n]
   end
 end
