@@ -113,7 +113,17 @@ describe "Award" do
   }
 
   it "retreives basic award attributes" do
-    @award.title.must_equal "Sägespäne aus Brennstoff zum Kochen und Heizen"
+    @award.title.must_equal(
+      "Sägespäne aus Brennstoff zum Kochen und Heizen")
     @award.year.must_equal "2007"
+    @award.organization.must_equal "Bikat Company Limited"
+    @award.link.must_equal "/awards/details/awdid/9253/"
+    @award.category.must_equal "fire"
+    @award.award_won.must_equal true
+    @award.award_title.must_equal "National 2008"
+    @award.country.must_equal "Ghana"
+    @award.description.must_equal <<-DESC
+Ziel des Projektes ist es, den Verbrauch von Feuerholz f&uuml;r Kochen und Heizung zu verringern indem S&auml;gesp&auml;ne als Brennstoff verwendet, um den Wald in Ghana zu sch&uuml;tzen. Der Gro&szlig;teil der l&auml;ndlichen Bev&ouml;lkerung in Ghana ist durch die hohe Armut auf das Holz als Energietr&auml;ger angewiesen. Der hohe Bedarf f&uuml;hrt jedoch zur Entwaldung und Verw&uuml;stung des Landes. Die Regierung hatte schon Programme gestartet, die Energieversorgung auf Gas umzustellen, dies scheiterte jedoch auf Grund der hohen Armut in Ghana.
+DESC
   end
 end
