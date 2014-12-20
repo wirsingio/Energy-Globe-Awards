@@ -9,6 +9,7 @@ class AwardsScraper
     @awards_url = awards_url
     @base_url   = base_url
     @cache      = cache
+    @awards     = []
   end
 
   def scrape_awards
