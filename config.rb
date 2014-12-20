@@ -82,6 +82,9 @@ configure :build do
     ]
   }
 
+  # So we can use simpler angular dependency injection notation
+  activate :ngmin
+
   # Use relative URLs
   # activate :relative_assets
 
