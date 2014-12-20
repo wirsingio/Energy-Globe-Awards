@@ -3,9 +3,9 @@ require 'nokogiri'
 
 class Award
   attr_reader :year, :title, :organization, :category,
+              :country, :description,
               :details, :details_link,
-              :award_won, :award_title,
-              :country, :description
+              :award_won, :award_title
 
   def initialize(row, base_url)
     @row = row
@@ -28,15 +28,15 @@ class Award
   end
 
   def parse
-    @title = get_title
-    @year = get_year
+    @title        = get_title
+    @year         = get_year
     @organization = get_org
     @details_link = get_link
-    @category = get_category
-    @award_won = won?
-    @award_title = get_award_title
-    @country = get_country
-    @description = get_description
+    @category     = get_category
+    @award_won    = won?
+    @award_title  = get_award_title
+    @country      = get_country
+    @description  = get_description
   end
 
   def images
@@ -59,16 +59,16 @@ class Award
 
   def to_json
     {
-      title: title,
-      year: year,
+      title:        title,
+      year:         year,
       organization: organization,
       details_link: details_link,
-      category: category,
-      award_won: won?,
-      award_title: award_title,
-      country: country,
-      description: description,
-      images: images
+      category:     category,
+      award_won:    won?,
+      award_title:  award_title,
+      country:      country,
+      description:  description,
+      images:       images
     }
   end
 
