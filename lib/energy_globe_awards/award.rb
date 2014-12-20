@@ -95,8 +95,7 @@ class Award
       td = td_at(4)
       winner_span = td.at_css('span')
       if winner_span
-        td_text = td.text
-        td_text.sub(/#{winner_span.text}$/, '')
+        td.text.sub(/#{winner_span.text}$/, '')
       else
         td.text
       end
