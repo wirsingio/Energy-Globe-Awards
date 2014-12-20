@@ -48,21 +48,6 @@ class Award
     end
   end
 
-  def to_json
-    {
-      title:        title,
-      year:         year,
-      organization: organization,
-      details_link: details_link,
-      category:     category,
-      award_won:    won?,
-      award_title:  award_title,
-      country:      country,
-      description:  description,
-      images:       images
-    }
-  end
-
   def title
     cache(:title) {
       td = @row.css('td')[1]
@@ -121,6 +106,23 @@ class Award
       desc_element.text
     }
   end
+
+  def to_json
+    {
+      title:        title,
+      year:         year,
+      organization: organization,
+      details_link: details_link,
+      category:     category,
+      award_won:    won?,
+      award_title:  award_title,
+      country:      country,
+      description:  description,
+      images:       images
+    }
+  end
+
+  private
 
   def td_at(n)
     @row.css('td')[n] || NullElement.new
