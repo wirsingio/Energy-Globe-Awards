@@ -13,6 +13,6 @@ class JSONWriter
   end
 
   def serialize_list
-    @awards.map { |award| award.to_json }
+    @awards.map(&:to_json)
   end
 end
