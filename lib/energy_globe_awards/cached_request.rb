@@ -5,7 +5,7 @@ class CachedRequest
   # expire after one day
   FRESHTIME = ->(){ 60 * 60 * 24 }
 
-  def initialize url
+  def initialize(url)
     @url = url
     @cache_dir = ENV['CACHEDIR'] ||
                  File.expand_path("../../../tmp/cache", __FILE__)
