@@ -11,14 +11,14 @@ AWARDSURL = "%s/awards/" % BASEURL
 DATAPATH  = File.expand_path "../../data/awards.json", __FILE__
 
 describe "Award" do
-  before {
+  before do
     cache_file = File.expand_path('../fixtures/request_cache_sample', __FILE__)
     scraper = AwardsScraper.new(BASEURL, nil, File.read(cache_file))
     scraper.scrape_awards
     @award = scraper.awards.first
-  }
+  end
 
-  it "retreives basic award attributes from list page" do
+  it "retrieves basic award attributes from list page" do
     @award.title.must_equal(
       "Sägespäne aus Brennstoff zum Kochen und Heizen")
     @award.year.must_equal "2007"
