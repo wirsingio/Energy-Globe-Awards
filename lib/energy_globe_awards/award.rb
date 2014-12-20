@@ -24,14 +24,15 @@ class Award
   end
 
   def images
-    return @images if @images
-    if details
-      if slides = @details.at_css(".slides_container")
-        images = slides.css('img')
-        return images.map { |img| "%s%s" % [@base_url, img['src']] if img }.compact
+    cache(:images) {
+      if details && (slides = @details.at_css(".slides_container"))
+        slides.css('img').to_a
+              .compact
+              .map { |img| "%s%s" % [@base_url, img['src']]}
+      else
+        []
       end
-    end
-    return []
+    }
   end
 
   def won?
