@@ -3,7 +3,7 @@ require 'energy_globe_awards/award'
 require 'energy_globe_awards/cached_request'
 
 class AwardsScraper
-  attr_reader :doc, :awards
+  attr_reader :awards
 
   def initialize(base_url, awards_url, cache=nil)
     @awards_url = awards_url
@@ -13,8 +13,8 @@ class AwardsScraper
 
   def scrape_awards
     body = response_body
-    @doc = Nokogiri::HTML(body)
-    @awards = @doc.css("tr")[1..-1].map { |row|
+    doc = Nokogiri::HTML(body)
+    @awards = doc.css("tr")[1..-1].map { |row|
       Award.new(row, @base_url)
     }
   end
