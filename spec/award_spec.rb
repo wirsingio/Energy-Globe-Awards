@@ -38,7 +38,6 @@ describe "Award" do
       details.to_s.must_match "Bikat Company Limited"
     end
 
-    focus
     it "retreives images" do
       award_with_images = @awards.last
       award_with_images.get_details
