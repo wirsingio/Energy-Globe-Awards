@@ -6,3 +6,7 @@ title: Energy Globe Award
 
   %header
     %h1.headline Energy Globe Award
+
+  %section{ "ng-controller" => "AwardsController" }
+    .award{ "ng-repeat" => "award in awards" }
+      %h3 {{ award.title }}

@@ -20,6 +20,7 @@
 
     = stylesheet_link_tag "normalize", "all"
 
-  %body{ class: page_classes }
+  %body{ class: page_classes, "ng-app" => "ega" }
     = yield
+    = javascript_include_tag  "vendor/angular/angular.min"
     = javascript_include_tag  "application"
