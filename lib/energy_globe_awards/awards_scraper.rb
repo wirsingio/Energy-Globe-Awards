@@ -12,24 +12,22 @@ class AwardsScraper
   end
 
   def scrape_awards
-    body = get_response_body
+    body = response_body
     @doc = Nokogiri::HTML(body)
     @awards = @doc.css("tr")[1..-1].map { |row|
-      award = Award.new(row, @base_url)
-      award.parse
-      award
+      Award.new(row, @base_url)
     }
   end
 
   def request_award_details
     @awards.each do |award|
-      award.get_details
+      award.request_details
     end
   end
 
   private
 
-  def get_response_body
+  def response_body
     if @cache
       Marshal.load(@cache).body
     else
