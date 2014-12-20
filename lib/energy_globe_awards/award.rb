@@ -4,6 +4,12 @@ require 'nokogiri'
 class Award
   attr_reader :details
 
+  class NullElement
+    def [](_)  "" end
+    def text() "" end
+    def method_missing(*_) NullElement.new end
+  end
+
   def initialize(row, base_url)
     @row = row
     @base_url = base_url
@@ -117,7 +123,7 @@ class Award
   end
 
   def td_at(n)
-    @row.css('td')[n]
+    @row.css('td')[n] || NullElement.new
   end
 
   def cache key
