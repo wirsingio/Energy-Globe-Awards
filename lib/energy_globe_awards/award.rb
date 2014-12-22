@@ -5,8 +5,8 @@ class Award
   attr_reader :details
 
   class NullElement
-    def [](_)  "" end
-    def text() "" end
+    def [](_)  '' end
+    def text() '' end
     def method_missing(*_) NullElement.new end
   end
 
@@ -16,25 +16,25 @@ class Award
   end
 
   def request_details
-    url = "%s%s" % [@base_url, details_link]
+    url = '%s%s' % [@base_url, details_link]
     req = CachedRequest.new(url)
     puts "Requesting award at #{url}"
     res = req.fetch
     if res.code == 200
-      puts "Request successful..."
+      puts 'Request successful...'
       body = res.body
       @details = Nokogiri::HTML(body)
     else
-      puts "Request failed..."
+      puts 'Request failed...'
     end
   end
 
   def images
     cache(:images) {
-      if details && (slides = @details.at_css(".slides_container"))
+      if details && (slides = @details.at_css('.slides_container'))
         slides.css('img').to_a
               .compact
-              .map { |img| "%s%s" % [@base_url, img['src']]}
+              .map { |img| '%s%s' % [@base_url, img['src']]}
       else
         []
       end
@@ -102,7 +102,7 @@ class Award
   def description
     cache(:description) {
       td = td_at(1)
-      desc_element = td.at_css("span")
+      desc_element = td.at_css('span')
       desc_element.text
     }
   end
