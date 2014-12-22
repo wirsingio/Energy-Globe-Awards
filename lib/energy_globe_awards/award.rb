@@ -41,11 +41,11 @@ class Award
     end
   end
 
-  def won?
-    @award_won ||= begin
+  def award_won
+    cache(:award_won) {
       td = td_at(4)
       !!td.text.match(/winner/i)
-    end
+    }
   end
 
   def title
@@ -114,7 +114,7 @@ class Award
       organization: organization,
       details_link: details_link,
       category:     category,
-      award_won:    won?,
+      award_won:    award_won,
       award_title:  award_title,
       country:      country,
       description:  description,
