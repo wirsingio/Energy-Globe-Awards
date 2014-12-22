@@ -31,7 +31,7 @@ class CachedRequest
   end
 
   def file_is_fresh?
-    (Time.now - File.stat(cache_filepath).mtime).to_f < EXPIRE_IN.call
+    (Time.now - File.stat(cache_filepath).mtime).to_f < EXPIRE_IN
   end
 
   def make_and_cache_request
