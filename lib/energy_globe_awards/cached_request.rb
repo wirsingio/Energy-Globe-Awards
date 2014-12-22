@@ -2,8 +2,7 @@ require 'typhoeus'
 require 'digest'
 
 class CachedRequest
-  # expire after one day
-  FRESHTIME = ->(){ 60 * 60 * 24 }
+  EXPIRE_IN = 60 * 60 * 24
 
   def initialize(url)
     @url = url
@@ -32,7 +31,7 @@ class CachedRequest
   end
 
   def file_is_fresh?
-    (Time.now - File.stat(cache_filepath).mtime).to_f < FRESHTIME.call
+    (Time.now - File.stat(cache_filepath).mtime).to_f < EXPIRE_IN.call
   end
 
   def make_and_cache_request
