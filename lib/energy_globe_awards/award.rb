@@ -32,9 +32,10 @@ class Award
   def images
     if details && (slides = @details.at_css('.slides_container'))
       cache(:images) {
-        slides.css('img').to_a
-              .compact
-              .map { |img| '%s%s' % [@base_url, img['src']]}
+        slides
+          .css('img').to_a
+          .compact
+          .map { |img| '%s%s' % [@base_url, img['src']]}
       }
     else
       []
