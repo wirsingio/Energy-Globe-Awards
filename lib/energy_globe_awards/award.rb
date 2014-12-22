@@ -128,7 +128,7 @@ class Award
     @row.css('td')[n] || NullElement.new
   end
 
-  def cache key
+  def cache(key)
     @cache ||= {}
     @cache.fetch(key) {
       value = yield
