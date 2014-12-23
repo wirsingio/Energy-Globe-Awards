@@ -9,7 +9,7 @@ npm install bower -g
 # install asset dependencies  
 bower install  
 # run static web server with livereload  
-bundle install middleman  
+bundle exec middleman  
 ```
 
 #### To run scraper
