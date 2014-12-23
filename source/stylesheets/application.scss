@@ -1,0 +1,17 @@
+@charset "utf-8";
+@import "normalize";
+@import "bourbon";
+@import "neat";
+@import "mixins/fonts";
+@import "settings/colors";
+
+body {
+  @include font-opensans;
+  font-size: 16px;
+  line-height: 21px;
+  color: $text-color;
+}
+
+#application {
+  @include outer-container(960px);
+}
