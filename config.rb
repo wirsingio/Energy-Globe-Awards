@@ -1,3 +1,14 @@
+
+###
+# Bower support for middleman-sprockets
+# http://middlemanapp.com/basics/asset-pipeline/#sprockets-import-path
+###
+
+sprockets.append_path File.join root, 'vendor/assets/components'
+sprockets.import_asset 'angular/angular.min.js'
+
+# =========== DEPLOYMENT ============ #
+
 activate :deploy do |deploy|
   deploy.method = :git
 end
