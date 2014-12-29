@@ -32,4 +32,10 @@ if you haven't bundled
 then  
 `ruby spec/award_spec.rb`
 
+### OSS Projects Used
+
+- [bootstrap combobox](https://github.com/danielfarrell/bootstrap-combobox)
+- [unUISlider](https://github.com/leongersen/noUiSlider)
+- [middleman](middlemanapp.com)
+
 LICENSE: MIT
