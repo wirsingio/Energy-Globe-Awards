@@ -1,8 +1,7 @@
 describe 'AwardsController', ->
   beforeEach module('ega')
 
-  randomName = ->
-    Math.random().toString(36).replace(/[^a-z]+/g, '')
+  randomName = -> Math.random().toString(36).replace(/[^a-z]+/g, '')
 
   beforeEach inject ($injector) ->
     @httpBackend = $injector.get('$httpBackend')
@@ -19,7 +18,4 @@ describe 'AwardsController', ->
     @httpBackend.flush()
 
     expect(scope.awards).toEqual awards
-
-    @httpBackend.verifyNoOutstandingExpectation()
-    @httpBackend.verifyNoOutstandingRequest()
 
