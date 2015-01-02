@@ -18,4 +18,3 @@ describe 'AwardsController', ->
     @httpBackend.flush()
 
     expect(scope.awards).toEqual awards
-
