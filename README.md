@@ -14,22 +14,18 @@ bundle exec middleman
 
 #### To run scraper
 
-if you haven't bundled  
-`bundle install`  
-then  
-`./bin/scrape`
-
-this will
+Running `./bin/scrape` will
 
 1. scrape the pages
 2. cache the requests made
 3. save a json file of the results under `./data/awards.json`
 
-### To run the scraper tests
+### To run the tests
 
-if you haven't bundled  
-`bundle install`  
-then  
-`ruby spec/award_spec.rb`
+You can run the scraper tests with `ruby spec/award_spec.rb`. For running your Jasmine specs, you can either start your app and go to `http://<my-local-middleman-host>/jasmine` or run them directly from the command line:
+
+```bash
+rake middleman_jasmine:ci
+```
 
 LICENSE: MIT
