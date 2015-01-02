@@ -5,7 +5,7 @@ require 'energy_globe_awards'
 
 BASEURL   = "http://www.energyglobe.at"
 AWARDSURL = "%s/awards/" % BASEURL
-DATAPATH  = File.expand_path "../../data/awards.json", __FILE__
+DATAPATH  = File.expand_path "../../source/data/awards.json", __FILE__
 
 def main
   scraper = AwardsScraper.new(BASEURL, AWARDSURL)
