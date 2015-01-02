@@ -22,7 +22,7 @@ Running `./bin/scrape` will
 
 ### To run the tests
 
-You can run the scraper tests with `ruby spec/award_spec.rb`. For running your Jasmine specs, you can either start your app and go to http://localhost:4567/jasmine or run them directly from the command line:
+You can run the scraper tests with `ruby spec/award_spec.rb`. For running your Jasmine specs, you can either start your app and go to [http://localhost:4567/jasmine](http://localhost:4567/jasmine) or run them directly from the command line:
 
 ```bash
 rake middleman_jasmine:ci
