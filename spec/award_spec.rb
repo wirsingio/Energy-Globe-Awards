@@ -15,7 +15,7 @@ describe "Award" do
     cache_file = File.expand_path('../fixtures/request_cache_sample', __FILE__)
     scraper = AwardsScraper.new(BASEURL, nil, File.read(cache_file))
     scraper.scrape_awards
-    @award = scraper.awards.first
+    @award, *other_awards, @award_with_images = scraper.awards
   end
 
   it "retrieves basic award attributes from list page" do
@@ -32,16 +32,15 @@ describe "Award" do
   end
 
   describe "details" do
-    let(:details) { @award.get_details }
+    let(:details) { @award.request_details }
 
     it "gets information from the details page" do
       details.to_s.must_match "Bikat Company Limited"
     end
 
     it "retreives images" do
-      award_with_images = @awards.last
-      award_with_images.get_details
-      images = award_with_images.images
+      @award_with_images.request_details
+      images = @award_with_images.images
       images.size.must_equal 5
     end
 
