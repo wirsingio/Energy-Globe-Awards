@@ -5,7 +5,6 @@
 ###
 
 sprockets.append_path File.join root, 'vendor/assets/components'
-sprockets.import_asset 'angular/angular.min.js'
 
 # =========== DEPLOYMENT ============ #
 
@@ -67,6 +66,11 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
+
+# Testing
+configure :development do
+  activate :jasmine
+end
 
 # Build-specific configuration
 configure :build do
