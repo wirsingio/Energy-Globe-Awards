@@ -10,7 +10,14 @@ title: Energy Globe Award
 
   <section ng-controller="AwardsController">
 
-    <div class="award" ng-repeat="award in awards">
+    <ul class="category-filter" ng-repeat="category in categories">
+      <li>
+        <input type="checkbox" id="category_checkbox_{{category}}" ng-model="categoryIsShown[category]">
+        <label for="category_checkbox_{{category}}">{{category}}</label>
+      </li>
+    </ul>
+
+    <div class="award" ng-repeat="award in awards | categoriesFilter:categoryIsShown">
       <h3>{{ award.title }}</h3>
     </div>
 
