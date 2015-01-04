@@ -7,5 +7,5 @@ EGA.controller "AwardsController", ($scope, $http) ->
     $scope.awards = res.data
 
     categoriesFilter = wirsing.filter['switch'].on($scope.awards, 'category')
-    $scope.categories = categoriesFilter.availableSwitches()
+    $scope.categories = categoriesFilter.names()
     $scope.categoryIsShown = categoriesFilter.allShown()

@@ -3,13 +3,15 @@ wirsing.filter ?= {}
 
 wirsing.filter.switch =
   on: (items, key) ->
-    switches = {}
+    switchObject = {}
 
-    for item in items
-      switches[item[key]] ?= true
+    switches = ->
+      if Object.keys(switchObject).length == 0
+        switchObject[item[key]] ?= true for item in items
+      switchObject
 
-    availableSwitches: -> Object.keys(switches)
+    names: -> Object.keys switches()
 
-    allShown: -> switches
+    allShown: -> switches()
 
     apply: (isShown) -> item for item in items when isShown[item[key]]

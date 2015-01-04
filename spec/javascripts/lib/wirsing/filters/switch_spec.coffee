@@ -9,7 +9,7 @@ describe 'wirsing.filter.switch', ->
     @filter = wirsing.filter['switch'].on(items, 'city')
 
   it 'extracts the available switches', ->
-    expect @filter.availableSwitches()
+    expect @filter.names()
       .toEqual ['Vienna', 'Klosterneuburg']
 
   it 'generates a configuration to show all switches', ->
