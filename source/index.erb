@@ -10,14 +10,25 @@ title: Energy Globe Award
 
   <section ng-controller="AwardsController">
 
-    <ul class="category-filter" ng-repeat="category in categories">
-      <li>
-        <input type="checkbox" id="category_checkbox_{{category}}" ng-model="categoryIsShown[category]">
-        <label for="category_checkbox_{{category}}">{{category}}</label>
-      </li>
-    </ul>
+    <section class="filters">
+      <h2>Kategorien</h2>
+      <ul class="category-filter" ng-repeat="category in categories">
+        <li>
+          <input type="checkbox" id="category_checkbox_{{category}}" ng-model="categoryIsShown[category]">
+          <label for="category_checkbox_{{category}}">{{category}}</label>
+        </li>
+      </ul>
 
-    <div class="award" ng-repeat="award in awards | categoriesFilter:categoryIsShown">
+      <h2>Jahre</h2>
+      <ul class="year-filter" ng-repeat="year in years">
+        <li>
+          <input type="checkbox" id="year_checkbox_{{year}}" ng-model="yearIsShown[year]">
+          <label for="year_checkbox_{{year}}">{{year}}</label>
+        </li>
+      <ul>
+    </section>
+
+    <div class="award" ng-repeat="award in awards | categoriesFilter:categoryIsShown | yearsFilter: yearIsShown">
       <h3>{{ award.title }}</h3>
     </div>
 
