@@ -6,7 +6,7 @@ describe 'wirsing.filter.switch', ->
       {name: 'Aaron', city: 'Klosterneuburg'}
     ]
 
-    @filter = wirsing.filter['switch'].on(items, 'city')
+    @filter = wirsing.filter.switch.on(items, 'city')
 
   it 'extracts the available switches', ->
     expect @filter.names()
