@@ -1,7 +1,6 @@
-@wirsing ?= {}
-wirsing.filter ?= {}
+#= require ../module
 
-wirsing.filter.switch =
+wirsing.module 'filter.switch',
   on: (items, key) ->
     switchObject = {}
 
