@@ -1,10 +1,10 @@
 @wirsing ?= {}
-wirsing.module = (name, properties = {}) ->
-  components = name.split('.')
+wirsing.module = (name, moduleFunction) ->
+  [predecessors..., component] = name.split('.')
   module = wirsing
 
-  for component in components
-    module[component] ?= {}
-    module = module[component]
+  for predecessor in predecessors
+    module[predecessor] ?= {}
+    module = module[predecessor]
 
-  module[property] = value for property, value of properties
+  module[component] = if moduleFunction? then moduleFunction() else {}
