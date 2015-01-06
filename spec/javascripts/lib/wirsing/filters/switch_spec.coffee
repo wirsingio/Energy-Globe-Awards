@@ -1,21 +1,14 @@
 describe 'wirsing.filter.switch', ->
   beforeEach ->
-    items = [
+    @items = [
       {name: 'Dominik', city: 'Vienna'},
       {name: 'Clemens', city: 'Vienna'},
       {name: 'Aaron', city: 'Klosterneuburg'}
     ]
 
-    @filter = wirsing.filter.switch.on(items, 'city')
-
-  it 'extracts the available switches', ->
-    expect @filter.names()
-      .toEqual ['Vienna', 'Klosterneuburg']
-
-  it 'generates a configuration to show all switches', ->
-    expect @filter.allShown()
-      .toEqual {'Vienna': true, 'Klosterneuburg': true}
+    @filter = wirsing.filter.switch.on('city')
 
   it 'filters by applying a configuration on the filter', ->
-    expect @filter.apply('Vienna': false, 'Klosterneuburg': true)
+    @filter.apply 'Vienna': false, 'Klosterneuburg': true
+    expect @filter(@items)
       .toEqual [{name: 'Aaron', city: 'Klosterneuburg'}]

@@ -28,7 +28,7 @@ title: Energy Globe Award
       <ul>
     </section>
 
-    <div class="award" ng-repeat="award in awards | categoriesFilter:categoryIsShown | yearsFilter: yearIsShown">
+    <div class="award" ng-repeat="award in filteredAwards">
       <h3>{{ award.title }}</h3>
     </div>
 
