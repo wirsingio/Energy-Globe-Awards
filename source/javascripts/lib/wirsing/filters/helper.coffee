@@ -10,3 +10,5 @@ wirsing.module 'filter.helper', ->
     map = {}
     map[item[key]] ?= true for item in items
     Object.keys(map)
+
+  chain: (functions) -> return -> fn() for fn in functions

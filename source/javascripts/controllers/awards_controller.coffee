@@ -1,35 +1,31 @@
-EGA.controller "AwardsController", ($scope, $http) ->
+
+{helper} = wirsing.filter
+
+EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
+
+  # setup view scope
   $scope.awards = []
-  $scope.filters = {}
-
-  {choices, chain, helper} = wirsing.filter
-
-  choicesFilterNames = ['category', 'year']
-
-  # set up scope
-  for filterName in choicesFilterNames
-    $scope.filters[filterName] =
-      names: []
-      filterMap: {}
-
   $scope.filteredAwards = []
+  $scope.filters =
+    category: names: [], filterMap: {}
+    year: names: [], filterMap: {}
 
-  $scope.$watch 'filters', ->
-    $scope.filteredAwards = filter($scope.awards)
-  , true
+  configurePipeline = ->
+    filterPipeline.setCategoryChoices $scope.filters.category.filterMap
+    filterPipeline.setYearChoices $scope.filters.year.filterMap
 
-  # set up filters
-  choicesFilterMap = {}
-  choicesFilterMap[name] = choices.on(name) for name in choicesFilterNames
-  choicesFilters = (filter for name, filter of choicesFilterMap)
-  filter = chain choicesFilters
+  filterAwards = -> $scope.filteredAwards = filterPipeline.filter $scope.awards
+
+  initializeFilters = ->
+    for type of $scope.filters
+      $scope.filters[type].names = helper.keys($scope.awards, type).sort()
+      $scope.filters[type].filterMap = helper.trueMap($scope.filters[type].names)
+
+  # react to changes of the original collection
+  $scope.$watch 'awards', helper.chain [initializeFilters, filterAwards]
+
+  # react to changes of filter configurations
+  $scope.$watch 'filters', helper.chain([configurePipeline, filterAwards]), true
 
   # fetch awards
-  $http.get("data/awards.json").then (res) ->
-    $scope.awards = res.data
-
-    for filterName in choicesFilterNames
-      filterConfig = $scope.filters[filterName]
-      filterConfig.names = helper.keys($scope.awards, filterName).sort()
-      filterConfig.filterMap = helper.trueMap(filterConfig.names)
-      choicesFilterMap[filterName].apply filterConfig.filterMap
+  $http.get("data/awards.json").then (result) -> $scope.awards = result.data
