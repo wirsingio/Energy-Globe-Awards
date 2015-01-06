@@ -1,31 +1,35 @@
 EGA.controller "AwardsController", ($scope, $http) ->
   $scope.awards = []
-  $scope.categories = []
-  $scope.categoryIsShown = {}
-  $scope.years = []
-  $scope.yearIsShown = {}
+  $scope.filters = {}
 
-  categoriesFilter = wirsing.filter.switch.on('category')
-  yearsFilter = wirsing.filter.switch.on('year')
-  filter = wirsing.filter.chain(categoriesFilter, yearsFilter)
+  {choices, chain, helper} = wirsing.filter
+
+  choicesFilterNames = ['category', 'year']
+
+  # set up scope
+  for filterName in choicesFilterNames
+    $scope.filters[filterName] =
+      names: []
+      filterMap: {}
 
   $scope.filteredAwards = []
 
-  $scope.$watch 'categoryIsShown', (switches) ->
-    categoriesFilter.apply switches
+  $scope.$watch 'filters', ->
     $scope.filteredAwards = filter($scope.awards)
   , true
 
-  $scope.$watch 'yearIsShown', (switches) ->
-    yearsFilter.apply switches
-    $scope.filteredAwards = filter($scope.awards)
-  , true
+  # set up filters
+  choicesFilterMap = {}
+  choicesFilterMap[name] = choices.on(name) for name in choicesFilterNames
+  choicesFilters = (filter for name, filter of choicesFilterMap)
+  filter = chain choicesFilters
 
+  # fetch awards
   $http.get("data/awards.json").then (res) ->
     $scope.awards = res.data
 
-    $scope.categories = wirsing.filter.helper.keys($scope.awards, 'category')
-    $scope.categoryIsShown = wirsing.filter.helper.trueMap($scope.categories)
-
-    $scope.years = wirsing.filter.helper.keys($scope.awards, 'year').sort()
-    $scope.yearIsShown = wirsing.filter.helper.trueMap($scope.years)
+    for filterName in choicesFilterNames
+      filterConfig = $scope.filters[filterName]
+      filterConfig.names = helper.keys($scope.awards, filterName).sort()
+      filterConfig.filterMap = helper.trueMap(filterConfig.names)
+      choicesFilterMap[filterName].apply filterConfig.filterMap

@@ -12,17 +12,17 @@ title: Energy Globe Award
 
     <section class="filters">
       <h2>Kategorien</h2>
-      <ul class="category-filter" ng-repeat="category in categories">
+      <ul class="category-filter" ng-repeat="category in filters.category.names">
         <li>
-          <input type="checkbox" id="category_checkbox_{{category}}" ng-model="categoryIsShown[category]">
+          <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
           <label for="category_checkbox_{{category}}">{{category}}</label>
         </li>
       </ul>
 
       <h2>Jahre</h2>
-      <ul class="year-filter" ng-repeat="year in years">
+      <ul class="year-filter" ng-repeat="year in filters.year.names">
         <li>
-          <input type="checkbox" id="year_checkbox_{{year}}" ng-model="yearIsShown[year]">
+          <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
           <label for="year_checkbox_{{year}}">{{year}}</label>
         </li>
       <ul>
