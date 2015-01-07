@@ -1,6 +1,6 @@
 #= require ../module
 
-# Takes an arry of functions and returns a chain function.
+# Takes an array of functions and returns a chain function.
 # When invoked it calls all given functions in a row, while
 # using the output of each as input of the next.
 
