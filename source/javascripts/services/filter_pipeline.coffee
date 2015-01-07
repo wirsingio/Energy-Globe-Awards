@@ -7,7 +7,7 @@ EGA.service "filterPipeline", ->
   yearChoices = choices.on 'year'
 
   return {
-    setCategoryChoices: (filterMap) -> categoryChoices.apply filterMap
-    setYearChoices: (filterMap) -> yearChoices.apply filterMap
+    setCategoryChoices: (filterMap) -> categoryChoices.configure filterMap
+    setYearChoices: (filterMap) -> yearChoices.configure filterMap
     filter: chain [categoryChoices, yearChoices]
   }
