@@ -1,5 +1,6 @@
 
-{choices, chain} = wirsing.filter
+{choices} = wirsing.filter
+{chain} = wirsing.utils
 
 EGA.service "filterPipeline", ->
 
