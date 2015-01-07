@@ -1,14 +1,13 @@
 
-{choices} = wirsing.filter
-{chain} = wirsing.utils
+{filter, utils} = wirsing
 
 EGA.service "filterPipeline", ->
 
-  categoryChoices = choices.on 'category'
-  yearChoices = choices.on 'year'
+  categoryChoices = filter.choices.on 'category'
+  yearChoices = filter.choices.on 'year'
 
   return {
     setCategoryChoices: (filterMap) -> categoryChoices.configure filterMap
     setYearChoices: (filterMap) -> yearChoices.configure filterMap
-    filter: chain [categoryChoices, yearChoices]
+    filter: utils.chain [categoryChoices, yearChoices]
   }

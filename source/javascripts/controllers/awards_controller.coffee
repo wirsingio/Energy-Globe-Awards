@@ -1,6 +1,5 @@
 
-{helper} = wirsing.filter
-{chain} = wirsing.utils
+{filter, utils} = wirsing
 
 EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
 
@@ -19,14 +18,14 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
 
   initializeFilters = ->
     for type of $scope.filters
-      $scope.filters[type].names = helper.keys($scope.awards, type).sort()
-      $scope.filters[type].filterMap = helper.trueMap($scope.filters[type].names)
+      $scope.filters[type].names = filter.helper.keys($scope.awards, type).sort()
+      $scope.filters[type].filterMap = filter.helper.trueMap($scope.filters[type].names)
 
   # react to changes of the original collection
-  $scope.$watch 'awards', chain([initializeFilters, filterAwards])
+  $scope.$watch 'awards', utils.chain([initializeFilters, filterAwards])
 
   # react to changes of filter configurations
-  $scope.$watch 'filters', chain([configurePipeline, filterAwards]), true
+  $scope.$watch 'filters', utils.chain([configurePipeline, filterAwards]), true
 
   # fetch awards
   $http.get("data/awards.json").then (result) -> $scope.awards = result.data
