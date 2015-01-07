@@ -6,15 +6,15 @@ describe 'AwardsController', ->
   beforeEach inject ($injector) ->
     @httpBackend = $injector.get('$httpBackend')
     @controller = $injector.get('$controller')
+    @scope = $injector.get('$rootScope').$new()
 
   it 'fetches the awards data initially', ->
     awards = [{myaward: randomName()}]
     @httpBackend
       .when 'GET', 'data/awards.json'
       .respond awards
-    scope = {}
 
-    @controller 'AwardsController', $scope: scope
+    @controller 'AwardsController', $scope: @scope
     @httpBackend.flush()
 
-    expect(scope.awards).toEqual awards
+    expect(@scope.awards).toEqual awards
