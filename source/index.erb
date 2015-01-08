@@ -13,7 +13,7 @@ title: Energy Globe Award
 
 <div class="awards-app" ng-controller="AwardsController">
   <section class="year-filter">
-    <h2>Jahre</h2>
+    <h2 class="year-filter-headline">Jahre</h2>
 
     <ul class="year-filter-list">
       <li ng-repeat="year in filters.year.names">
@@ -24,12 +24,12 @@ title: Energy Globe Award
   </section>
 
   <section class="category-filter">
-    <h2>Kategorien</h2>
+    <h2 class="category-filter-headline">Kategorien</h2>
 
     <ul class="category-filter-list">
-      <li ng-repeat="category in filters.category.names">
+      <li ng-repeat="category in filters.category.names" class="category-{{ category }}">
         <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
-        <label for="category_checkbox_{{category}}">{{category}}</label>
+        <label for="category_checkbox_{{category}}" class="category-filter-label">{{category}}</label>
       </li>
     </ul>
   </section>
@@ -39,11 +39,15 @@ title: Energy Globe Award
     
     <ul class="awards-list">
       <li ng-repeat="award in filteredAwards" class="award category-{{ award.category }}">
-        <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="award-image">
-        <span class="award-country">{{ award.country }}</span>
-        <span class="award-year">{{ award.year }}</span>
-        <h3>{{ award.title }}</h3>
-        <span class="award-organization">{{ award.organization }}</span>
+        <a href="{{ award.details_link }}">
+          <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="award-image">
+          <div class="award-text">
+            <div class="award-year">{{ award.year }}</div>
+            <div class="award-country">{{ award.country }}</div>
+            <h3 class="award-title">{{ award.title }}</h3>
+            <div class="award-organization">{{ award.organization }}</div>
+          </div>
+        </a>
       </li>
     </ul>
   </section>

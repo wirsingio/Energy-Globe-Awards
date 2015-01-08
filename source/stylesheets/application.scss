@@ -7,7 +7,7 @@
 @import "mixins/fonts";
 @import "settings/colors";
 
-$base-font-size: 16px;
+$base-font-size: 14px;
 
 body {
   @include font-opensans;
