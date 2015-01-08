@@ -10,8 +10,8 @@ EGA.directive('multiSelect', [function () {
     templateUrl: 'templates/multi_select.html',
 
     scope: {
-      data: '=data',
-      output: '=output'
+      data: '=options',
+      output: '=selected'
     },
 
     link: function (scope, element, attrs) {
