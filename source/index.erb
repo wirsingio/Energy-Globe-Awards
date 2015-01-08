@@ -11,6 +11,15 @@ title: Energy Globe Award
   <section ng-controller="AwardsController">
 
     <section class="filters">
+
+      <h3>Länder</h2>
+      <div multi-select
+           data="data"
+           output="output"
+           placeholder='Alle Länder …'
+           limit-filter=10>
+      </div>
+
       <h2>Kategorien</h2>
       <ul class="category-filter" ng-repeat="category in filters.category.names">
         <li>

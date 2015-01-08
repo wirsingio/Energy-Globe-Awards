@@ -4,6 +4,7 @@
 @import "neat";
 @import "mixins/fonts";
 @import "settings/colors";
+@import "directives/multi_select";
 
 body {
   @include font-opensans;
