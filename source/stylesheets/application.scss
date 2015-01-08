@@ -1,17 +1,66 @@
+//= require_directory ./components
 @charset "utf-8";
 @import "normalize";
 @import "bourbon";
+@import "settings/grid_layout";
 @import "neat";
 @import "mixins/fonts";
 @import "settings/colors";
 
+$base-font-size: 16px;
+
 body {
   @include font-opensans;
-  font-size: 16px;
-  line-height: 21px;
+  font-size: $base-font-size;
   color: $text-color;
 }
 
-#application {
+.page-header{
+  background: $header-background;
+  color: $header-color;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  @include box-sizing(border-box);
+
+  a {
+    color: inherit;
+  }
+}
+
+.page-header-container {
   @include outer-container(960px);
+  padding: $gutter 0;
+
+  .page-header-content {
+    @include shift(1);
+    @include span-columns(3);
+  }
+}
+
+.page-header-headline {
+  font-size: golden-ratio(16px, 1);
+}
+
+.awards-app {
+  @include outer-container(960px);
+  padding: $gutter 0;
+
+  .year-filter {
+    @include span-columns(1);
+  }
+
+  @include direction-context(right-to-left) {
+    .category-filter {
+      @include span-columns(1);
+    }
+  }
+
+  .awards {
+    @include span-columns(3);
+
+    .award {
+      @include span-columns(1 of 3);
+      @include omega(3n);
+      margin-top: golden-ratio($gutter, -1);
+    }
+  }
 }
