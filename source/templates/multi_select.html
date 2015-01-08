@@ -28,7 +28,7 @@
      ng-mouseenter="hoverSelector = true" ng-mouseleave="hoverSelector = false">
 
   <ul>
-    <li ng-repeat="item in (filteredData = (data | filter: query | limitTo: limitFilter))"
+    <li ng-repeat="item in (filteredData = (data | filter: query))"
         ng-class="$parent.selectorPosition === $index ? 'choice-selected' : ''"
         ng-animate="'selector'">
       <div class="choice"

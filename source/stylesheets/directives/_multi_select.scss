@@ -79,6 +79,8 @@ div.ng-ms-selector {
   border-top: 0;
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
   background-color: white;
+  max-height: 400px;
+  overflow-y: scroll;
 }
 
 div.ng-ms-selector > ul {
