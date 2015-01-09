@@ -15,14 +15,9 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
     filterPipeline.setCategoryChoices $scope.filters.category.filterMap
     filterPipeline.setYearChoices $scope.filters.year.filterMap
 
-    if anyCountriesSelected()
-      # filter awards to the selected countries
-      countryFilterMap = filter.helper.trueMap($scope.filters.countries.selected)
-    else
-      # show awards from all countries
-      countryFilterMap = filter.helper.trueMap($scope.filters.countries.names)
-      
-    filterPipeline.setCountryChoices countryFilterMap
+    {countries} = $scope.filters
+    shownCountries = if anyCountriesSelected() then countries.selected else countries.names
+    filterPipeline.setCountryChoices filter.helper.trueMap(shownCountries)      
 
   anyCountriesSelected = -> $scope.filters.countries.selected.length > 0
 
