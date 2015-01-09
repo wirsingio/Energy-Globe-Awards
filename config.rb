@@ -68,13 +68,6 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
-###
-# Pre-compile angular templates into index.html
-# https://github.com/damrbaby/middleman-angular-templates
-###
-
-activate :angular_templates
-
 # Testing
 configure :development do
   activate :jasmine

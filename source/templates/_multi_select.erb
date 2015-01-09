@@ -3,7 +3,7 @@
      ng-class="{'ng-ms-hover': hoverInput, 'ng-ms-focus': focusInput}"
      ng-mouseover="hoverInput = true" ng-mouseleave="hoverInput = false">
   <ul>
-    <li ng-repeat="item in output track by $index">
+    <li ng-repeat="item in selected track by $index">
       <span class="chosen"
             ng-class="focusChoice[$index] ? 'chosen-focused' : ''"
             ng-click="removeItem($index)">
@@ -12,6 +12,7 @@
     </li>
 
     <li>
+      <!--input-->
       <input ng-model="query"
              placeholder="{{placeholder}}"
              ng-style="{'width': inputWidth + 'px'}"
@@ -20,26 +21,23 @@
     </li>
   </ul>
 
-</div> <!--input-->
+</div>
 
+<!--selector-->
 <div class="ng-ms-selector"
      ng-style="{'width': width + 'px'}"
      ng-show="showSelector"
      ng-mouseenter="hoverSelector = true" ng-mouseleave="hoverSelector = false">
 
-  <ul>
-    <li ng-repeat="item in (filteredData = (data | filter: query))"
-        ng-class="$parent.selectorPosition === $index ? 'choice-selected' : ''"
-        ng-animate="'selector'">
+  <ul> <!--options-->
+    <li ng-repeat="item in (filteredData = (options | filter: query))"
+        ng-class="$parent.selectorPosition === $index ? 'choice-selected' : ''">
       <div class="choice"
-           ng-click="addItem(item, output.length, $event)"
+           ng-click="addItem(item, selected.length, $event)"
            ng-mouseenter="$parent.selectorPosition = $index">
         <span>{{item}}</span>
       </div>
     </li>
-  </ul> <!--data-->
+  </ul>
 
-  <div class="selector-more" ng-show="filteredData.length >= limitFilter">
-    •••</div>
-
-</div> <!--selector-->
+</div>
