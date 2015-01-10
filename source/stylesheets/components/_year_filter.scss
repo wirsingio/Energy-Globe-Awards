@@ -1,0 +1,10 @@
+@import "mixins/lists";
+@import "mixins/text";
+
+.year-filter-list {
+  @include choice-list;
+}
+
+.year-filter-headline {
+  @include filter-headline;
+}
