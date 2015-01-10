@@ -1,0 +1,43 @@
+@import "bourbon";
+@import "mixins/accessibility";
+@import "settings/colors";
+@import "settings/grid_layout";
+
+.country-filter-headline {
+  @include screenreaders-only;
+}
+
+.country-filter-select {
+  background: $box-background;
+  min-height: $gutter;
+
+  .ng-ms {
+    border: none;
+    box-shadow: none;
+
+    input {
+      background: inherit;
+      height: $gutter;
+      margin-top: 0;
+      line-height: $gutter;
+
+      &:hover {
+        @include placeholder {
+          color: $text-color;
+        }
+      }
+    }
+  }
+
+  .ng-ms-selector {
+    border: none;
+
+    ul {
+      border: 1px solid $box-background;
+
+      &:empty {
+        border: none;
+      }
+    }
+  }
+}

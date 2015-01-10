@@ -15,7 +15,7 @@
 
 .award {
   $box-shadow-color: rgba(0,0,0,0.1); 
-  $background: #EEE;
+  $box-background: #EEE;
   @include transition(all 0.1s ease-in-out);
   box-shadow: 0 0 0 $box-shadow-color;
 
@@ -23,19 +23,19 @@
     text-decoration: none;
     color: inherit;
     display: block;
-    background: $background;
+    background: $box-background;
 
     &:hover {
       @include transform(scale(1.05));
       box-shadow: 0px 6px 10px $box-shadow-color;
-      background: lighten($background, 0.5%);
+      background: lighten($box-background, 0.5%);
       outline: 1px solid #CCC;
     }
 
     &:active {
       @include transform(perspective(500px) rotateX(-8deg));
       box-shadow: 0px 1px 10px $box-shadow-color;
-      background: darken($background, 3%);
+      background: darken($box-background, 3%);
     }
   }
 }
