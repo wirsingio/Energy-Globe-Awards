@@ -6,6 +6,7 @@
 @import "neat";
 @import "mixins/fonts";
 @import "settings/colors";
+@import "directives/multi_select";
 
 $base-font-size: 14px;
 
@@ -52,6 +53,12 @@ body {
     .category-filter {
       @include span-columns(1);
     }
+  }
+
+  .country-filter {
+    @include shift(2);
+    @include span-columns(1);
+    @include omega;
   }
 
   .awards {

@@ -9,17 +9,26 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
   $scope.filters =
     category: names: [], filterMap: {}
     year: names: [], filterMap: {}
+    countries: names: [], selected: []
 
   configurePipeline = ->
     filterPipeline.setCategoryChoices $scope.filters.category.filterMap
     filterPipeline.setYearChoices $scope.filters.year.filterMap
 
+    {countries} = $scope.filters
+    shownCountries = if anyCountriesSelected() then countries.selected else countries.names
+    filterPipeline.setCountryChoices filter.helper.trueMap(shownCountries)      
+
+  anyCountriesSelected = -> $scope.filters.countries.selected.length > 0
+
   filterAwards = -> $scope.filteredAwards = filterPipeline.filter $scope.awards
 
   initializeFilters = ->
-    for type of $scope.filters
+    for type in ['category', 'year']
       $scope.filters[type].names = filter.helper.keys($scope.awards, type).sort()
       $scope.filters[type].filterMap = filter.helper.trueMap($scope.filters[type].names)
+
+    $scope.filters.countries.names = filter.helper.keys($scope.awards, 'country').sort()
 
   # react to changes of the original collection
   $scope.$watch 'awards', utils.chain([initializeFilters, filterAwards])

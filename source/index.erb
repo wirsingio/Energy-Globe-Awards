@@ -34,6 +34,16 @@ title: Energy Globe Award
     </ul>
   </section>
 
+  <section class="country-filter">
+    <h2 class="country-filter-headline">Länder</h2>
+    <div multi-select
+         options="filters.countries.names"
+         selected="filters.countries.selected"
+         placeholder='Alle Länder …'
+         class="country-filter-select">
+    </div>
+  </section>
+
   <section class="awards">
     <h2 class="awards-headline">Awards</h2>
     
@@ -52,3 +62,8 @@ title: Energy Globe Award
     </ul>
   </section>
 </div>
+
+<!-- include angular templates as partials -->
+<script type="text/ng-template" id="multi_select.html">
+  <%= partial 'templates/multi_select' %>
+</script>
