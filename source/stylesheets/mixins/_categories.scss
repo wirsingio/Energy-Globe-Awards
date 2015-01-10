@@ -1,0 +1,21 @@
+@mixin category-border-color {
+  .category-earth & {
+    border-color: $category-earth-color;
+  }
+
+  .category-fire & {
+    border-color: $category-fire-color;
+  }
+
+  .category-water & {
+    border-color: $category-water-color;
+  }
+
+  .category-air & {
+    border-color: $category-air-color;
+  }
+
+  .category-youth & {
+    border-color: $category-youth-color;
+  }
+}
