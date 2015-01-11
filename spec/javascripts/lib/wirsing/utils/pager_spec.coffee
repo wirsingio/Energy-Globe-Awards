@@ -1,18 +1,19 @@
 describe 'wirsing.utils.Pager', ->
+  beforeEach ->
+    data = [0..100]
+    @length = 10
+    @pList = new wirsing.utils.Pager(perPage: @length)
+    @pList.setList(data)
 
   it 'initializes to the correct size', ->
-    data = [0..100]
-    length = 10
-    pList = new wirsing.utils.Pager(perPage: length)
-    pList.setList(data)
-    expect(pList.currentList().length).toEqual(length)
+    expect(@pList.currentList().length).toEqual(@length)
 
+  it 'can page to the next page', ->
+    expect(@pList.currentList()).not.toContain(15)
+    @pList.nextPage()
+    expect(@pList.currentList()).toContain(15)
 
-  it 'grows as expected', ->
-    data = [0..100]
-    length = 10
-    pList = new wirsing.utils.Pager(perPage: length)
-    pList.setList(data)
-    expect(pList.currentList()).not.toContain(15)
-    pList.nextPage(data)
-    expect(pList.currentList()).toContain(15)
+  it 'has the correct amount of items after paging', ->
+    @pList.nextPage()
+    expect(@pList.currentList().length).toEqual(@length * 2)
+
