@@ -21,6 +21,9 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
       $scope.filters[type].names = filter.helper.keys($scope.awards, type).sort()
       $scope.filters[type].filterMap = filter.helper.trueMap($scope.filters[type].names)
 
+  # paging function
+  $scope.loadNextPage = -> $scope.filteredAwards.nextPage()
+
   # react to changes of the original collection
   $scope.$watch 'awards', utils.chain([initializeFilters, filterAwards])
 

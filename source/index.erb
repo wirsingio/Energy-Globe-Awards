@@ -28,8 +28,10 @@ title: Energy Globe Award
       <ul>
     </section>
 
-    <div class="award" ng-repeat="award in filteredAwards.currentList()">
-      <h3>{{ award.title }}</h3>
+    <div infinite-scroll="loadNextPage()" infinite-scroll-distance="3" class="awards">
+      <div class="award" ng-repeat="award in filteredAwards.currentList()">
+        <h3>{{ award.title }}</h3>
+      </div>
     </div>
 
   </section>
