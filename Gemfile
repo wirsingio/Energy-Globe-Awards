@@ -20,5 +20,4 @@ gem 'bourbon' # http://bourbon.io/
 gem 'neat' # http://neat.bourbon.io/
 
 # angular
-gem 'middleman-angular-templates', git: 'git@github.com:damrbaby/middleman-angular-templates.git'
 gem 'middleman-ngmin' # so we can use simpler dependency injection notation

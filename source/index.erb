@@ -11,6 +11,14 @@ title: Energy Globe Award
   <section ng-controller="AwardsController">
 
     <section class="filters">
+
+      <h2>Länder</h2>
+      <div multi-select
+           options="filters.countries.names"
+           selected="filters.countries.selected"
+           placeholder='Alle Länder …'>
+      </div>
+
       <h2>Kategorien</h2>
       <ul class="category-filter" ng-repeat="category in filters.category.names">
         <li>
@@ -37,3 +45,8 @@ title: Energy Globe Award
   </section>
 
 </div>
+
+<!-- include angular templates as partials -->
+<script type="text/ng-template" id="multi_select.html">
+  <%= partial 'templates/multi_select' %>
+</script>

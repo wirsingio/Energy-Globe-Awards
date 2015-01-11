@@ -1,2 +1,5 @@
 # main angular module
-@EGA = angular.module "ega", ['infinite-scroll']
+@EGA = angular.module "ega", [
+  'infinite-scroll'
+  'ui.event'
+]

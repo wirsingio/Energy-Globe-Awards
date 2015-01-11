@@ -4,3 +4,4 @@
 #= require ./init
 #= require_directory ./services
 #= require_directory ./controllers
+#= require_directory ./directives

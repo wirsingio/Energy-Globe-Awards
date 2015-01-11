@@ -7,19 +7,28 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
   $scope.awards = []
   $scope.filteredAwards = new utils.Pager(perPage: 30)
   $scope.filters =
-    category: names: [], filterMap: {}
-    year:     names: [], filterMap: {}
+    category:  names: [], filterMap: {}
+    year:      names: [], filterMap: {}
+    countries: names: [], selected: []
 
   configurePipeline = ->
     filterPipeline.setCategoryChoices $scope.filters.category.filterMap
     filterPipeline.setYearChoices $scope.filters.year.filterMap
 
+    {countries} = $scope.filters
+    shownCountries = if anyCountriesSelected() then countries.selected else countries.names
+    filterPipeline.setCountryChoices filter.helper.trueMap(shownCountries)
+
+  anyCountriesSelected = -> $scope.filters.countries.selected.length > 0
+
   filterAwards = -> $scope.filteredAwards.setList(filterPipeline.filter($scope.awards))
 
   initializeFilters = ->
-    for type of $scope.filters
+    for type in ['category', 'year']
       $scope.filters[type].names = filter.helper.keys($scope.awards, type).sort()
       $scope.filters[type].filterMap = filter.helper.trueMap($scope.filters[type].names)
+
+    $scope.filters.countries.names = filter.helper.keys($scope.awards, 'country').sort()
 
   # paging function
   $scope.loadNextPage = -> $scope.filteredAwards.nextPage()

@@ -1,0 +1,43 @@
+<div ng-style="{'width': width + 'px'}"
+     class="ng-ms"
+     ng-class="{'ng-ms-hover': hoverInput, 'ng-ms-focus': focusInput}"
+     ng-mouseover="hoverInput = true" ng-mouseleave="hoverInput = false">
+  <ul>
+    <li ng-repeat="item in selected track by $index">
+      <span class="chosen"
+            ng-class="focusChoice[$index] ? 'chosen-focused' : ''"
+            ng-click="removeItem($index)">
+        {{item}} <span class="remove">X</span>
+      </span>
+    </li>
+
+    <li>
+      <!--input-->
+      <input ng-model="query"
+             placeholder="{{placeholder}}"
+             ng-style="{'width': inputWidth + 'px'}"
+             ui-event="{focus: 'focus()', blur: 'blur()'}"
+             ng-keydown="keyParser($event)"/>
+    </li>
+  </ul>
+
+</div>
+
+<!--selector-->
+<div class="ng-ms-selector"
+     ng-style="{'width': width + 'px'}"
+     ng-show="showSelector"
+     ng-mouseenter="hoverSelector = true" ng-mouseleave="hoverSelector = false">
+
+  <ul> <!--options-->
+    <li ng-repeat="item in (filteredData = (options | filter: query))"
+        ng-class="$parent.selectorPosition === $index ? 'choice-selected' : ''">
+      <div class="choice"
+           ng-click="addItem(item, selected.length, $event)"
+           ng-mouseenter="$parent.selectorPosition = $index">
+        <span>{{item}}</span>
+      </div>
+    </li>
+  </ul>
+
+</div>
