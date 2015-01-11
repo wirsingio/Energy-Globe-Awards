@@ -5,7 +5,7 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
 
   # setup view scope
   $scope.awards = []
-  $scope.filteredAwards = new utils.PaginatedList(pageSize: 30)
+  $scope.filteredAwards = new utils.Pager(perPage: 30)
   $scope.filters =
     category: names: [], filterMap: {}
     year:     names: [], filterMap: {}
