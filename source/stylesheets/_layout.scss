@@ -3,7 +3,7 @@
 @import "neat";
 
 .page-header > .container {
-  @include outer-container(960px);
+  @include outer-container;
   padding: $gutter 0;
 
   .content {
@@ -13,7 +13,7 @@
 }
 
 .awards-app {
-  @include outer-container(960px);
+  @include outer-container;
   padding: $gutter 0;
 
 
