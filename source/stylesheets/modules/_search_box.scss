@@ -4,9 +4,28 @@
 @import "settings/grid_layout";
 
 .search-box {
+
   > .headline {
     @include screenreaders-only;
   }
 
+  input {
+    display: block;
+    width: 100%;
+    height: $gutter;
+    line-height: $gutter;
+    padding-left: 30px;
+    border: none;
+    background: $box-background url('/images/search-icon.svg') no-repeat 7px;
 
+    &:hover {
+      @include placeholder {
+        color: $text-color;
+      }
+    }
+
+    &:focus {
+      outline: 0px;
+    }
+  }
 }
