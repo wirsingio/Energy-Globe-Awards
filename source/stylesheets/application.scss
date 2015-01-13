@@ -1,4 +1,4 @@
-//= require_directory ./components
+//= require_directory ./modules
 @charset "utf-8";
 @import "normalize";
 @import "bourbon";
@@ -25,21 +25,22 @@ body {
   a {
     color: inherit;
   }
-}
 
-.page-header-container {
-  @include outer-container(960px);
-  padding: $gutter 0;
+  .container {
+    @include outer-container(960px);
+    padding: $gutter 0;
 
-  .page-header-content {
-    @include shift(1);
-    @include span-columns(3);
+    .page-header-content {
+      @include shift(1);
+      @include span-columns(3);
+    }
+  }
+
+  .headline {
+    font-size: golden-ratio(16px, 1);
   }
 }
 
-.page-header-headline {
-  font-size: golden-ratio(16px, 1);
-}
 
 .awards-app {
   @include outer-container(960px);

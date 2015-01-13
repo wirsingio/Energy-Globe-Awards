@@ -3,19 +3,17 @@ title: Energy Globe Award
 ---
 
 <header class="page-header">
-  <div class="page-header-container">
-    <div class="page-header-content">
-      <h1 class="page-header-headline">Energy Globe Award</h1>
-      <p>Diese Projekte wurden für ihren Fokus auf Ressourcenschonung, Energieeffizienz und Einsatz erneuerbarer Energien mit dem <a href="http://www.energyglobe.at/">Energy Globe Award</a> ausgezeichnet.</p>
-    </div>
+  <div class="container">
+    <h1 class="headline">Energy Globe Award</h1>
+    <p>Diese Projekte wurden für ihren Fokus auf Ressourcenschonung, Energieeffizienz und Einsatz erneuerbarer Energien mit dem <a href="http://www.energyglobe.at/">Energy Globe Award</a> ausgezeichnet.</p>
   </div>
 </header>
 
 <div class="awards-app" ng-controller="AwardsController">
   <section class="year-filter">
-    <h2 class="year-filter-headline">Jahre</h2>
+    <h2 class="headline">Jahre</h2>
 
-    <ul class="year-filter-list">
+    <ul class="choices-list">
       <li ng-repeat="year in filters.year.names">
         <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
         <label for="year_checkbox_{{year}}">{{year}}</label>
@@ -24,38 +22,38 @@ title: Energy Globe Award
   </section>
 
   <section class="category-filter">
-    <h2 class="category-filter-headline">Kategorien</h2>
+    <h2 class="headline">Kategorien</h2>
 
-    <ul class="category-filter-list">
-      <li ng-repeat="category in filters.category.names" class="category-{{ category }}">
+    <ul class="choices-list">
+      <li ng-repeat="category in filters.category.names" class="is-{{ category }}">
         <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
-        <label for="category_checkbox_{{category}}" class="category-filter-label">{{category}}</label>
+        <label for="category_checkbox_{{category}}" class="choice-label">{{category}}</label>
       </li>
     </ul>
   </section>
 
   <section class="country-filter">
-    <h2 class="country-filter-headline">Länder</h2>
+    <h2 class="headline">Länder</h2>
     <div multi-select
          options="filters.countries.names"
          selected="filters.countries.selected"
          placeholder='Alle Länder …'
-         class="country-filter-select">
+         class="select">
     </div>
   </section>
 
   <section class="awards">
-    <h2 class="awards-headline">Awards</h2>
+    <h2 class="headline">Awards</h2>
     
     <ul class="awards-list">
-      <li ng-repeat="award in filteredAwards" class="award category-{{ award.category }}">
+      <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
         <a href="http://www.energyglobe.at/{{ award.details_link }}">
-          <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="award-image">
-          <div class="award-text">
-            <div class="award-year">{{ award.year }}</div>
-            <div class="award-country">{{ award.country }}</div>
-            <h3 class="award-title">{{ award.title }}</h3>
-            <div class="award-organization">{{ award.organization }}</div>
+          <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="image">
+          <div class="text">
+            <div class="year">{{ award.year }}</div>
+            <div class="country">{{ award.country }}</div>
+            <h3 class="title">{{ award.title }}</h3>
+            <div class="organization">{{ award.organization }}</div>
           </div>
         </a>
       </li>

@@ -7,7 +7,7 @@
   }
 }
 
-@mixin choice-list {
+@mixin choices-list {
   @include plain-list;
 
   [type=checkbox] {
