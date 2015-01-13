@@ -12,6 +12,6 @@ EGA.service "filterPipeline", ->
     setCategoryChoices: (filterMap) -> categoryChoices.configure filterMap
     setYearChoices: (filterMap) -> yearChoices.configure filterMap
     setCountryChoices: (filterMap) -> countryChoices.configure filterMap
-    setSearch: (input) -> search.configure term: input
+    setSearchTerm: (input) -> search.configure term: input
     filter: utils.chain [categoryChoices, yearChoices, countryChoices, search]
   }

@@ -10,13 +10,13 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
     category: names: [], filterMap: {}
     year: names: [], filterMap: {}
     countries: names: [], selected: []
-    search: ''
+    searchTerm: ''
 
   configurePipeline = ->
     filterPipeline.setCategoryChoices $scope.filters.category.filterMap
     filterPipeline.setYearChoices $scope.filters.year.filterMap
-    filterPipeline.setSearch $scope.filters.search
-    
+    filterPipeline.setSearchTerm $scope.filters.searchTerm
+
     {countries} = $scope.filters
     shownCountries = if anyCountriesSelected() then countries.selected else countries.names
     filterPipeline.setCountryChoices filter.helper.trueMap(shownCountries)
