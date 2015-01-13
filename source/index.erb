@@ -2,46 +2,65 @@
 title: Energy Globe Award
 ---
 
-<div id="application">
-
-  <header>
-    <h1 class="headline">Energy Globe Award</h1>
-  </header>
-
-  <section ng-controller="AwardsController">
-
-    <section class="filters">
-
-      <h2>Länder</h2>
-      <div multi-select
-           options="filters.countries.names"
-           selected="filters.countries.selected"
-           placeholder='Alle Länder …'>
-      </div>
-
-      <h2>Kategorien</h2>
-      <ul class="category-filter" ng-repeat="category in filters.category.names">
-        <li>
-          <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
-          <label for="category_checkbox_{{category}}">{{category}}</label>
-        </li>
-      </ul>
-
-      <h2>Jahre</h2>
-      <ul class="year-filter" ng-repeat="year in filters.year.names">
-        <li>
-          <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
-          <label for="year_checkbox_{{year}}">{{year}}</label>
-        </li>
-      <ul>
-    </section>
-
-    <div class="award" ng-repeat="award in filteredAwards">
-      <h3>{{ award.title }}</h3>
+<header class="page-header">
+  <div class="container">
+    <div class="content">
+      <h1 class="headline">Energy Globe Award</h1>
+      <p>Diese Projekte wurden für ihren Fokus auf Ressourcenschonung, Energieeffizienz und Einsatz erneuerbarer Energien mit dem <a href="http://www.energyglobe.at/">Energy Globe Award</a> ausgezeichnet.</p>
     </div>
+  </div>
+</header>
 
+<div class="awards-app" ng-controller="AwardsController">
+  <section class="year-filter">
+    <h2 class="headline">Jahre</h2>
+
+    <ul class="choices-list">
+      <li ng-repeat="year in filters.year.names">
+        <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
+        <label for="year_checkbox_{{year}}">{{year}}</label>
+      </li>
+    <ul>
   </section>
 
+  <section class="category-filter">
+    <h2 class="headline">Kategorien</h2>
+
+    <ul class="choices-list">
+      <li ng-repeat="category in filters.category.names" class="is-{{ category }}">
+        <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
+        <label for="category_checkbox_{{category}}" class="choice-label">{{category}}</label>
+      </li>
+    </ul>
+  </section>
+
+  <section class="country-filter">
+    <h2 class="headline">Länder</h2>
+    <div multi-select
+         options="filters.countries.names"
+         selected="filters.countries.selected"
+         placeholder='Alle Länder …'
+         class="select">
+    </div>
+  </section>
+
+  <section class="awards">
+    <h2 class="headline">Awards</h2>
+    
+    <ul class="awards-list">
+      <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
+        <a href="http://www.energyglobe.at/{{ award.details_link }}">
+          <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="image">
+          <div class="text">
+            <div class="year">{{ award.year }}</div>
+            <div class="country">{{ award.country }}</div>
+            <h3 class="title">{{ award.title }}</h3>
+            <div class="organization">{{ award.organization }}</div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
 </div>
 
 <!-- include angular templates as partials -->
