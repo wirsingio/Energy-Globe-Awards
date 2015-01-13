@@ -1,0 +1,12 @@
+@import "bourbon";
+@import "mixins/accessibility";
+@import "settings/colors";
+@import "settings/grid_layout";
+
+.search-box {
+  > .headline {
+    @include screenreaders-only;
+  }
+
+
+}

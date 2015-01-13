@@ -27,8 +27,11 @@
     }
   }
 
+  .search-box {
+    @include span-columns(2);
+  }
+
   .country-filter {
-    @include shift(2);
     @include span-columns(1);
     @include omega;
   }
