@@ -1,0 +1,18 @@
+@import "bourbon";
+@import "settings/colors";
+@import "settings/grid_layout";
+
+.page-header {
+  background: $header-background;
+  color: $header-color;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  @include box-sizing(border-box);
+
+  a {
+    color: inherit;
+  }
+
+  .headline {
+    font-size: golden-ratio(16px, 1);
+  }
+}
