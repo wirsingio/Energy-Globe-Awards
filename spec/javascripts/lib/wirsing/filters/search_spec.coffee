@@ -30,10 +30,6 @@ describe 'wirsing.filter.search', ->
       @filter.configure term: 'Dominik'
       expect(@filter.term).toEqual 'Dominik'
       expect(@filter @items).toEqual [@items[0]]
-
-    it 'sanitizes the given search term', ->
-      @filter.configure term: 'Dom]in\i&k/'
-      expect(@filter.term).toEqual 'Dominik'
       
   # ============ SEARCH PROPERTY ============= #
 
