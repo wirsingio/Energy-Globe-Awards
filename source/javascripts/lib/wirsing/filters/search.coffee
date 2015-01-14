@@ -18,6 +18,8 @@ wirsing.module 'filter.search', ->
     search.configure = (config) ->
       search.in = config.in || search.in || throw new Error 'option: <in> required'
       search.term = config.term || search.term || ''
+      # sanitize for regexp by removing non-alphanumeric chars
+      search.term = search.term.replace /[^a-zA-Z 0-9]+/g, ''
       search.minChars = config.minChars || search.minChars || 3
       return search
 
