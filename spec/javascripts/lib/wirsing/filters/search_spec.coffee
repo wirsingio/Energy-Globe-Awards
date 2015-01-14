@@ -6,7 +6,7 @@ describe 'wirsing.filter.search', ->
   beforeEach ->
     @items = [
       {name: 'Dominik from Vienna', city: 'Vienna'},
-      {name: 'Clemens', city: 'Vienna'},
+      {name: 'Clemens [DönerDöner Kebab]', city: 'Vienna'},
       {name: 'Aaron', city: 'Klosterneuburg'}
     ]
 
@@ -17,6 +17,14 @@ describe 'wirsing.filter.search', ->
   it 'ignores case while searching', ->
     filter = search term: 'doMiniK', in: 'name'
     expect(filter @items).toEqual [@items[0]]
+
+  it 'also works with umlauts', ->
+    filter = search term: 'Döner Kebab', in: 'name'
+    expect(filter @items).toEqual [@items[1]]
+
+  it 'supports regexp expressions in search term', ->
+    filter = search term: '(Döner){2} Kebab', in: 'name'
+    expect(filter @items).toEqual [@items[1]]
 
   # ============ SEARCH TERM ============= #
 
