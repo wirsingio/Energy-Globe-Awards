@@ -14,6 +14,10 @@ describe 'wirsing.filter.search', ->
     filter = search term: 'Dominik', in: 'name'
     expect(filter @items).toEqual [@items[0]]
 
+  it 'ignores case while searching', ->
+    filter = search term: 'doMiniK', in: 'name'
+    expect(filter @items).toEqual [@items[0]]
+
   # ============ SEARCH TERM ============= #
 
   describe 'configuring search term', ->
