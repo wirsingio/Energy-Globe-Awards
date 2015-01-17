@@ -68,6 +68,15 @@ title: Energy Globe Award
   </section>
 </div>
 
+<footer class="page-footer">
+  Diese Website wird von
+  <a class="wirsing-link" href="http://www.wirsing.io">
+    <%= sprockets.find_asset('wirsing-logo-neutral.svg').to_s %>
+    Wirsing
+  </a>
+  entwickelt und gewartet.
+</footer>
+
 <!-- include angular templates as partials -->
 <script type="text/ng-template" id="multi_select.html">
   <%= partial 'templates/multi_select' %>
