@@ -6,12 +6,6 @@
 
 sprockets.append_path File.join root, 'vendor/assets/components'
 
-# =========== DEPLOYMENT ============ #
-
-activate :deploy do |deploy|
-  deploy.method = :git
-end
-
 ###
 # Compass
 ###
