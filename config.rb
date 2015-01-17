@@ -73,6 +73,12 @@ configure :development do
   activate :jasmine
 end
 
+# Deployment
+activate :s3_sync do |s3|
+  s3.bucket = 'energyglobe.wirsing.io'
+  s3.region = 'eu-central-1'
+end
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
