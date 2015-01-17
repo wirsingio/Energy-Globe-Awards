@@ -84,6 +84,9 @@ configure :build do
   # For example, change the Compass output style for deployment
   activate :minify_css
 
+  # So we can use simpler angular dependency injection notation
+  activate :ngannotate
+
   # Minify Javascript on build
   activate :minify_javascript
 
@@ -102,9 +105,6 @@ configure :build do
       { icon: "favicon.ico", size: "64x64,32x32,24x24,16x16" },
     ]
   }
-
-  # So we can use simpler angular dependency injection notation
-  activate :ngmin
 
   # Use relative URLs
   activate :relative_assets

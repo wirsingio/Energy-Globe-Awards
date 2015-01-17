@@ -191,8 +191,8 @@ GEM
       middleman-core (>= 3.0.2)
       multi_json (~> 1.0)
       rack-livereload
-    middleman-ngmin (0.4.1)
-      execjs (~> 2.0.2)
+    middleman-ngannotate (0.14.1.1)
+      execjs (>= 1.4)
       middleman-core (~> 3.2)
       middleman-sprockets (~> 3.2)
     middleman-s3_sync (3.0.40)
@@ -286,7 +286,7 @@ DEPENDENCIES
   middleman-favicon-maker (~> 3.7)
   middleman-jasmine!
   middleman-livereload (~> 3.1.0)
-  middleman-ngmin
+  middleman-ngannotate
   middleman-s3_sync
   minitest-focus
   neat
