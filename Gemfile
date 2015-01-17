@@ -21,3 +21,6 @@ gem 'neat' # http://neat.bourbon.io/
 
 # angular
 gem 'middleman-ngmin' # so we can use simpler dependency injection notation
+
+# deployment
+gem 'middleman-s3_sync'
