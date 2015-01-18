@@ -2,8 +2,10 @@
 @import "settings/grid_layout";
 @import "neat";
 
+$total-width: 960px;
+
 .page-header > .container {
-  @include outer-container;
+  @include outer-container($total-width);
   padding: $gutter 0;
 
   .content {
@@ -13,7 +15,7 @@
 }
 
 .awards-app {
-  @include outer-container;
+  @include outer-container($total-width);
   padding: $gutter 0;
 
 
