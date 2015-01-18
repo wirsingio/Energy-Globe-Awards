@@ -40,9 +40,13 @@
     }
   }
 
-  .image {
+  .image,
+  .category {
     width: 100%;
     height: 3 * $gutter;
+    line-height: 3 * $gutter;
+    text-align: center;
+    font-size: golden-ratio(1em, 1);
   }
 
   .text {
@@ -52,8 +56,15 @@
   }
 
   @each $category, $category-color in $category-colors {
-    .is-category-#{$category} .text {
-      border-color: $category-color;
+    .is-category-#{$category} {
+      .text {
+        border-color: $category-color;
+      }
+
+      .category {
+        background: mix($box-background, $category-color, 30%);
+        color: $category-color;
+      }
     }
   }
 
