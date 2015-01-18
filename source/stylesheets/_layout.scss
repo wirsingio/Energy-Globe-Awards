@@ -38,6 +38,7 @@
 
   .awards {
     @include span-columns(3);
+    margin-bottom: $footer-height;
 
     .award {
       @include span-columns(1 of 3);
