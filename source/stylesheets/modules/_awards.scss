@@ -82,6 +82,10 @@
     font-size: 0.8em;
   }
 
+  .country {
+    margin-top: golden-ratio(1em, -1);
+  }
+
   .year {
     float: right;
   }
