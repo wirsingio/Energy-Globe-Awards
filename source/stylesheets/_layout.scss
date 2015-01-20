@@ -14,8 +14,28 @@
 
 .awards-app {
   @include outer-container;
-  padding: $gutter 0;
 
+  .filters {
+    padding: $gutter 0;
+
+    &.is-fixed {
+      position: fixed;
+      top: 0;
+      max-width: inherit;
+      width: 100%;
+
+      > .input-filters {
+        margin-top: -$gutter;
+        padding-top: $gutter;
+        height: 2.5 * $gutter;
+        background: white;
+      }
+
+      + .awards {
+        @include shift(1);
+      }
+    }
+  }
 
   .year-filter {
     @include span-columns(1);

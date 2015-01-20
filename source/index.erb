@@ -12,42 +12,46 @@ title: Energy Globe Award
 </header>
 
 <div class="awards-app" ng-controller="AwardsController">
-  <section class="year-filter">
-    <h2 class="headline">Jahre</h2>
+  <div fix-at-top class="filters">
+    <section class="year-filter">
+      <h2 class="headline">Jahre</h2>
 
-    <ul class="choices-list">
-      <li ng-repeat="year in filters.year.names">
-        <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
-        <label for="year_checkbox_{{year}}">{{year}}</label>
-      </li>
-    <ul>
-  </section>
+      <ul class="choices-list">
+        <li ng-repeat="year in filters.year.names">
+          <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
+          <label for="year_checkbox_{{year}}">{{year}}</label>
+        </li>
+      <ul>
+    </section>
 
-  <section class="category-filter">
-    <h2 class="headline">Kategorien</h2>
+    <section class="category-filter">
+      <h2 class="headline">Kategorien</h2>
 
-    <ul class="choices-list">
-      <li ng-repeat="category in filters.category.names" class="is-{{ category }}">
-        <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
-        <label for="category_checkbox_{{category}}" class="choice-label">{{category}}</label>
-      </li>
-    </ul>
-  </section>
+      <ul class="choices-list">
+        <li ng-repeat="category in filters.category.names" class="is-{{ category }}">
+          <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
+          <label for="category_checkbox_{{category}}" class="choice-label">{{category}}</label>
+        </li>
+      </ul>
+    </section>
 
-  <section class="search-box">
-    <h2 class="headline">Suche</h2>
-    <input type="text" ng-model="filters.searchTerm" placeholder="suchen …">
-  </section>
+    <div class="input-filters">
+      <section class="search-box">
+        <h2 class="headline">Suche</h2>
+        <input type="text" ng-model="filters.searchTerm" placeholder="suchen …">
+      </section>
 
-  <section class="country-filter">
-    <h2 class="headline">Länder</h2>
-    <div multi-select
-         options="filters.countries.names"
-         selected="filters.countries.selected"
-         placeholder='Alle Länder …'
-         class="select">
+      <section class="country-filter">
+        <h2 class="headline">Länder</h2>
+        <div multi-select
+             options="filters.countries.names"
+             selected="filters.countries.selected"
+             placeholder='Alle Länder …'
+             class="select">
+        </div>
+      </section>
     </div>
-  </section>
+  </div>
 
   <section class="awards">
     <h2 class="headline">Awards</h2>
