@@ -15,6 +15,20 @@
     .ng-ms {
       border: none;
       box-shadow: none;
+      position: relative;
+
+      // Adds CSS triangle to the select box
+      &:before {
+        position: absolute;
+        top: calc(50% - 1px); // always center it
+        right: 8px;
+        display: inline-block;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #CCC;
+        border-left: 5px solid transparent;
+        border-bottom-color: rgba(0, 0, 0, 0.2);
+        content: '';
+      }
 
       input {
         background: inherit;
