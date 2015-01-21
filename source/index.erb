@@ -58,9 +58,8 @@ title: Energy Globe Award
     </div>
   </div>
 
-  <section class="awards">
+  <section infinite-scroll="loadNextPage()" infinite-scroll-distance="3"  class="awards">
     <h2 class="headline">Awards</h2>
-    
     <ul class="awards-list">
       <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
         <a href="http://www.energyglobe.at/{{ award.details_link }}">
