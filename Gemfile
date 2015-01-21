@@ -6,6 +6,7 @@ gem 'nokogiri'
 gem 'rake'
 gem 'pry'
 gem 'minitest-focus'
+gem 'text-hyphen'
 
 # middleman
 gem "middleman", "~>3.3.6"
