@@ -1,7 +1,10 @@
 require 'json'
 require 'text/hyphen'
 
+
 class Reprocess
+  VALID_CATEGORIES = %w(earth air water fire youth other)
+
   def initialize source, destination
     @source      = source
     @destination = destination
@@ -12,6 +15,7 @@ class Reprocess
     load_file
     reverse
     hyphenate
+    filter_categories
     print_to_file
   end
 
@@ -30,6 +34,15 @@ class Reprocess
       award['title'] = hyphenate_sentence(award['title'], hh)
       award['description'] = hyphenate_sentence(award['description'], hh)
       award
+    }
+  end
+
+  def filter_categories
+    @json.map! { |item|
+      unless VALID_CATEGORIES.include?(item['category'])
+        item['category'] = 'other'
+      end
+      item
     }
   end
 
