@@ -4,20 +4,35 @@ class Reprocess
   def initialize source, destination
     @source = source
     @destination = destination
+    @json = nil
   end
 
   def reprocess
-    raw = File.read(@source)
-    json = JSON.load(raw)
-    json = json.reverse
-    output = "["
-    output << "\n#{JSON.dump(json.shift)}"
-    json.each do |line|
-      output << ",\n"
-      output << JSON.dump(line)
-    end
-    output << "\n]"
-    File.open(@destination, 'w') { |f| f.puts output }
+    load_file
+    reverse
+    print_to_file
   end
+
+  def load_file
+    raw = File.read(@source)
+    @json = JSON.load(raw)
+  end
+
+  def reverse
+    @json = @json.reverse
+  end
+
+  def print_to_file
+    File.open(@destination, 'w') { |f|
+      f << "["
+      f << "\n#{JSON.dump(@json.shift)}"
+      @json.each do |line|
+        f << ",\n"
+        f << JSON.dump(line)
+      end
+      f << "\n]"
+    }
+  end
+
 
 end
