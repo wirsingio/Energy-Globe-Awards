@@ -33,9 +33,7 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
     $scope.filters.countries.names = filter.helper.keys($scope.awards, 'country').sort()
 
   # paging function
-  $scope.loadNextPage = ->
-    console.log "loading next page"
-    $scope.filteredAwards.nextPage()
+  $scope.loadNextPage = -> $scope.filteredAwards.nextPage()
 
   # react to changes of the original collection
   $scope.$watch 'awards', utils.chain([initializeFilters, filterAwards])
