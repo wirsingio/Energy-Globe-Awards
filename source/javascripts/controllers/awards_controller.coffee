@@ -5,7 +5,7 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
 
   # setup view scope
   $scope.awards = []
-  $scope.filteredAwards = new utils.Pager(perPage: 30)
+  $scope.filteredAwards = []
   $scope.filters =
     category:  names: [], filterMap: {}
     year:      names: [], filterMap: {}
@@ -23,7 +23,7 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
 
   anyCountriesSelected = -> $scope.filters.countries.selected.length > 0
 
-  filterAwards = -> $scope.filteredAwards.setList(filterPipeline.filter($scope.awards))
+  filterAwards = -> $scope.filteredAwards = filterPipeline.filterFirstPage($scope.awards)
 
   initializeFilters = ->
     for type in ['category', 'year']
@@ -33,7 +33,7 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
     $scope.filters.countries.names = filter.helper.keys($scope.awards, 'country').sort()
 
   # paging function
-  $scope.loadNextPage = -> $scope.filteredAwards.nextPage()
+  $scope.loadNextPage = -> $scope.filteredAwards = filterPipeline.filterNextPage($scope.awards)
 
   # react to changes of the original collection
   $scope.$watch 'awards', utils.chain([initializeFilters, filterAwards])
