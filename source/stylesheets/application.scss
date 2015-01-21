@@ -1,18 +1,5 @@
-@charset "utf-8";
-@import "normalize";
-@import "bourbon";
-@import "neat";
-@import "mixins/fonts";
-@import "settings/colors";
-@import "directives/multi_select";
-
-body {
-  @include font-opensans;
-  font-size: 16px;
-  line-height: 21px;
-  color: $text-color;
-}
-
-#application {
-  @include outer-container(960px);
-}
+//= require ./_normalize
+//= require ./_base
+//= require ./_layout
+//= require_directory ./modules
+//= require_directory ./directives

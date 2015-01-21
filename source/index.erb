@@ -2,49 +2,92 @@
 title: Energy Globe Award
 ---
 
-<div id="application">
+<header class="page-header">
+  <div class="container">
+    <div class="content">
+      <h1 class="headline">Finde ausgezeichnete nachhaltige Projekte</h1>
+      <p class="info">
+        Diese Projekte wurden für ihren Fokus auf Ressourcenschonung,
+        Energieeffizienz und Einsatz erneuerbarer Energien mit dem
+        <a href="http://www.energyglobe.at/">Energy Globe Award</a>
+        ausgezeichnet.
+      </p>
+    </div>
+  </div>
+</header>
 
-  <header>
-    <h1 class="headline">Energy Globe Award</h1>
-  </header>
+<div class="awards-app" ng-controller="AwardsController">
+  <div fix-at-top class="filters">
+    <section class="year-filter">
+      <h2 class="headline">Jahre</h2>
 
-  <section ng-controller="AwardsController">
-
-    <section class="filters">
-
-      <h2>Länder</h2>
-      <div multi-select
-           options="filters.countries.names"
-           selected="filters.countries.selected"
-           placeholder='Alle Länder …'>
-      </div>
-
-      <h2>Kategorien</h2>
-      <ul class="category-filter" ng-repeat="category in filters.category.names">
-        <li>
-          <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
-          <label for="category_checkbox_{{category}}">{{category}}</label>
-        </li>
-      </ul>
-
-      <h2>Jahre</h2>
-      <ul class="year-filter" ng-repeat="year in filters.year.names">
-        <li>
+      <ul class="choices-list">
+        <li ng-repeat="year in filters.year.names">
           <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
           <label for="year_checkbox_{{year}}">{{year}}</label>
         </li>
       <ul>
     </section>
 
-    <div infinite-scroll="loadNextPage()" infinite-scroll-distance="3" class="awards">
-      <div class="award" ng-repeat="award in filteredAwards.currentList()">
-        <h3>{{ award.title }}</h3>
-      </div>
+    <section class="category-filter">
+      <h2 class="headline">Kategorien</h2>
+
+      <ul class="choices-list">
+        <li ng-repeat="category in filters.category.names" class="is-{{ category }}">
+          <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
+          <label for="category_checkbox_{{category}}" class="choice-label">{{category}}</label>
+        </li>
+      </ul>
+    </section>
+
+    <div class="input-filters">
+      <section class="search-box">
+        <h2 class="headline">Suche</h2>
+        <input type="text" ng-model="filters.searchTerm" placeholder="suchen …">
+      </section>
+
+      <section class="country-filter">
+        <h2 class="headline">Länder</h2>
+        <div multi-select
+             options="filters.countries.names"
+             selected="filters.countries.selected"
+             placeholder='Alle Länder …'
+             class="select">
+        </div>
+      </section>
     </div>
+  </div>
 
+  <section class="awards">
+    <h2 class="headline">Awards</h2>
+    
+    <ul class="awards-list">
+      <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
+        <a href="http://www.energyglobe.at/{{ award.details_link }}">
+          <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="image" ng-if="award.images[0]">
+          <header class="category" ng-if="!award.images[0]">
+            {{ award.category }}
+          </header>
+          <div class="text">
+            <div class="year">{{ award.year }}</div>
+            <div class="country">{{ award.country }}</div>
+            <h3 class="title">{{ award.title }}</h3>
+            <div class="organization">{{ award.organization }}</div>
+          </div>
+        </a>
+      </li>
+    </ul>
   </section>
-
 </div>
+
+<footer class="page-footer">
+  Diese Website wird von
+  <a class="wirsing-link" href="http://www.wirsing.io">
+    <%= sprockets.find_asset('wirsing-logo-neutral.svg').to_s %>
+    Wirsing
+  </a>
+  entwickelt und gewartet.
+</footer>
 
 <!-- include angular templates as partials -->
 <script type="text/ng-template" id="multi_select.html">

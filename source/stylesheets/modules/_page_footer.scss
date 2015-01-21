@@ -1,0 +1,48 @@
+@import "settings/colors";
+@import "settings/grid_layout.scss";
+
+.page-footer {
+  background: $footer-background;
+  color: $footer-color;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+  line-height: $footer-height;
+  text-align: center;
+  font-size: 1.2em;
+
+  #wirsing_logo {
+    width: 1.8em;
+    vertical-align: middle;
+
+    path {
+      fill: $wirsing-green;
+    }
+
+    circle {
+      stroke: $wirsing-green;
+    }
+  }
+
+  > .wirsing-link {
+    color: $wirsing-green;
+    text-decoration: none;
+    padding-right: 0.2em;
+
+    &:hover {
+      $hover-color: lighten($wirsing-green, 10%);
+      color: $hover-color;
+
+      #wirsing_logo {
+        path {
+          fill: $hover-color;
+        }
+
+        circle {
+          stroke: $hover-color;
+        }
+      }
+    }
+  }
+}

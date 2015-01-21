@@ -6,12 +6,6 @@
 
 sprockets.append_path File.join root, 'vendor/assets/components'
 
-# =========== DEPLOYMENT ============ #
-
-activate :deploy do |deploy|
-  deploy.method = :git
-end
-
 ###
 # Compass
 ###
@@ -73,10 +67,19 @@ configure :development do
   activate :jasmine
 end
 
+# Deployment
+activate :s3_sync do |s3|
+  s3.bucket = 'energyglobe.wirsing.io'
+  s3.region = 'eu-central-1'
+end
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
   activate :minify_css
+
+  # So we can use simpler angular dependency injection notation
+  activate :ngannotate
 
   # Minify Javascript on build
   activate :minify_javascript
@@ -96,9 +99,6 @@ configure :build do
       { icon: "favicon.ico", size: "64x64,32x32,24x24,16x16" },
     ]
   }
-
-  # So we can use simpler angular dependency injection notation
-  activate :ngmin
 
   # Use relative URLs
   activate :relative_assets

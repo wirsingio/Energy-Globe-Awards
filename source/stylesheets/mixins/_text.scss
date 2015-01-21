@@ -1,0 +1,12 @@
+@import "bourbon";
+@import "settings/grid_layout";
+
+@mixin filter-headline {
+  font-size: inherit;
+  border-bottom: 1px solid #CCC;
+  padding: 0 0 0.3em;
+  margin: 0 0 1.5em 0;
+  @include box-sizing(border-box);
+  height: $gutter;
+  line-height: $gutter;
+}

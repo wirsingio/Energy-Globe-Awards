@@ -1,0 +1,69 @@
+@import "bourbon";
+@import "settings/grid_layout";
+@import "neat";
+
+.page-header > .container {
+  @include outer-container;
+  padding: $gutter 0;
+
+  .content {
+    @include shift(1);
+    @include span-columns(3);
+  }
+}
+
+.awards-app {
+  @include outer-container;
+
+  .filters {
+    padding: $gutter 0;
+
+    &.is-fixed {
+      position: fixed;
+      top: 0;
+      max-width: inherit;
+      width: 100%;
+
+      > .input-filters {
+        margin-top: -$gutter;
+        padding-top: $gutter;
+        height: 2.5 * $gutter;
+        background: white;
+      }
+
+      + .awards {
+        @include shift(1);
+      }
+    }
+  }
+
+  .year-filter {
+    @include span-columns(1);
+  }
+
+  @include direction-context(right-to-left) {
+    .category-filter {
+      @include span-columns(1);
+    }
+  }
+
+  .search-box {
+    @include span-columns(2);
+  }
+
+  .country-filter {
+    @include span-columns(1);
+    @include omega;
+  }
+
+  .awards {
+    @include span-columns(3);
+    margin-bottom: $footer-height;
+
+    .award {
+      @include span-columns(1 of 3);
+      @include omega(3n);
+      margin-top: golden-ratio($gutter, -1);
+    }
+  }
+}

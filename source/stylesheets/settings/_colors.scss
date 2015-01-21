@@ -1,1 +1,23 @@
+$wirsing-green: #91C277;
+
 $text-color: #666;
+$header-background: $wirsing-green;
+$header-color: white;
+
+$footer-background: #333;
+$footer-color: #aaa;
+
+$box-background: #EEE;
+
+$category-earth-color: #C68361;
+$category-fire-color: #D96850;
+$category-water-color: #3AA0BD;
+$category-air-color: #92D0BD;
+$category-youth-color: #89BA70;
+$category-other-color: grey;
+
+$category-colors: (earth, $category-earth-color),
+                   (fire, $category-fire-color),
+                   (water, $category-water-color),
+                   (air, $category-air-color),
+                   (youth, $category-youth-color);

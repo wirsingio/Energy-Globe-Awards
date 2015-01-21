@@ -1,0 +1,35 @@
+@mixin plain-list {
+  &,
+  & li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@mixin choices-list {
+  @include plain-list;
+
+  [type=checkbox] {
+    display: none;
+
+    + label {
+      opacity: 0.5;
+      cursor: pointer;
+      text-decoration: line-through;
+    }
+
+    &:checked + label {
+      opacity: 1;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  li {
+    margin: 0.5em 0;
+  }
+}

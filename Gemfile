@@ -11,7 +11,6 @@ gem 'minitest-focus'
 gem "middleman", "~>3.3.6"
 gem "middleman-livereload", "~> 3.1.0"
 gem "middleman-favicon-maker", "~> 3.7"
-gem 'middleman-deploy', '~> 0.3.0'
 # TODO: Use orinal repo again, once our pull request is merged.
 gem 'middleman-jasmine', github: 'wirsingio/middleman-jasmine'
 
@@ -20,4 +19,7 @@ gem 'bourbon' # http://bourbon.io/
 gem 'neat' # http://neat.bourbon.io/
 
 # angular
-gem 'middleman-ngmin' # so we can use simpler dependency injection notation
+gem 'middleman-ngannotate' # so we can use simpler dependency injection notation
+
+# deployment
+gem 'middleman-s3_sync'

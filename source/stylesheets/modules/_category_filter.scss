@@ -1,0 +1,24 @@
+@import "mixins/lists";
+@import "mixins/text";
+@import "settings/colors";
+
+.category-filter {
+  > .choices-list {
+    @include choices-list;
+  }
+
+  .choice-label {
+    padding: 0 0.6em;
+    border-left: 2px solid $category-other-color;
+  }
+
+  @each $category, $category-color in $category-colors {
+    .is-#{$category} .choice-label {
+      border-color: $category-color;
+    }
+  }
+
+  > .headline {
+    @include filter-headline;
+  }
+}
