@@ -40,13 +40,22 @@
     }
   }
 
-  .image,
-  .category {
-    width: 100%;
-    height: 3 * $gutter;
-    line-height: 3 * $gutter;
+  header {
+    $height: 3 * $gutter;
+    height: $height;
+    line-height: $height;
     text-align: center;
     font-size: golden-ratio(1em, 1);
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      vertical-align: middle;
+    }
+
+    img + .category {
+      display: none;
+    }
   }
 
   .text {
@@ -61,7 +70,7 @@
         border-color: $category-color;
       }
 
-      .category {
+      header {
         background: mix($box-background, $category-color, 30%);
         color: $category-color;
       }
