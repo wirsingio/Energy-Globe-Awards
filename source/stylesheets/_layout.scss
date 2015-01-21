@@ -33,6 +33,7 @@
 
       + .awards {
         @include shift(1);
+        margin-top: 2 * $gutter;
       }
     }
   }
