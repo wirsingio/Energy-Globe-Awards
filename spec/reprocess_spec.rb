@@ -10,12 +10,6 @@ describe "Reprocess" do
     @processor = Reprocess.new(@source, @dest)
   end
 
-  it "the result is valid json" do
-    @processor.reprocess
-    raw = File.read(@dest)
-    JSON.load(raw).size.must_equal 4
-  end
-
   it "reverses the list" do
     @processor.reprocess
     raw_source = File.read(@source)
@@ -32,6 +26,7 @@ describe "Reprocess" do
   end
 
   it "adds hyphens" do
+
   end
 
 end
