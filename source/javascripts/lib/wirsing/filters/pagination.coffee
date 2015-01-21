@@ -1,5 +1,4 @@
 #= require ../module
-    filter.firstPage()
 
 wirsing.module 'filter.pagination', ->
   (options) ->
