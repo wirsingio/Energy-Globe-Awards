@@ -14,3 +14,4 @@ tmp/cache/*.cache
 .DS_Store
 
 vendor/assets/components/*
+source/data/awards_processed.json

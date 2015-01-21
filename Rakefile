@@ -5,9 +5,14 @@ require 'middleman'
 require 'middleman-jasmine'
 require 'middleman/jasmine/tasks'
 
-require_relative './lib/energy_globe_awards/reprocess'
+$:.unshift File.expand_path('../lib', __FILE__)
+require 'energy_globe_awards'
 
 desc 'reprocess data to remove bad images, add hyphens'
 task :reprocess do
-  Reprocess.new(File.expand_path('../source/data/awards.json', __FILE__))
+  require 'bundler/setup'
+  source = File.expand_path('../source/data/awards.json', __FILE__)
+  destination = File.expand_path('../source/data/awards_processed.json', __FILE__)
+  processor = Reprocess.new(source, destination)
+  processor.reprocess
 end
