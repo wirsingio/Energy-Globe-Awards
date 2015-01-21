@@ -1,8 +1,9 @@
 #= require ../module
+    filter.firstPage()
 
 wirsing.module 'filter.pagination', ->
   (options) ->
-    pageSize = options.perPage || 30
+    pageSize = options.perPage ? 30
     visibleCount = 0
 
     filter = (items) -> items[...visibleCount]
