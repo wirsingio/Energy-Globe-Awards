@@ -17,3 +17,9 @@ describe 'wirsing.utils.Pager', ->
     @pList.nextPage()
     expect(@pList.currentList().length).toEqual(@length * 2)
 
+  it 'resets list size when you add new items', ->
+    @pList.nextPage()
+    newData = [0..100]
+    @pList.setList(newData)
+    expect(@pList.currentList().length).toEqual(@length)
+

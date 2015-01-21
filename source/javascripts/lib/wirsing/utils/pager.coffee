@@ -5,10 +5,16 @@
 wirsing.module 'utils.Pager', ->
   class Pager
     constructor: (@options={}) ->
-      @pageSize     = @options.perPage || 30
-      @list         = []
-      @visibleCount = @pageSize
+      @pageSize = @options.perPage || 30
+      @list     = []
+      @resetCount()
 
-    setList: (newList) -> @list = newList
+    resetCount: -> @visibleCount = @pageSize
+
+    setList: (newList) ->
+      @list = newList
+      @resetCount()
+
     nextPage:    -> @visibleCount += @pageSize
+
     currentList: -> @list.slice(0,@visibleCount)
