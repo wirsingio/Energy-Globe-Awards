@@ -3,9 +3,8 @@ EGA.directive 'imageSuggestions', ->
   scope:
     imageSuggestions: '='
   link: (scope, element, attrs) ->
-
     scope.$watch 'imageSuggestions', (images) ->
-      loadImage = (index) ->
+      loadImage = (index = 0) ->
         return if index >= images.length
 
         imageObj = new Image
@@ -13,4 +12,4 @@ EGA.directive 'imageSuggestions', ->
         imageObj.onerror = -> loadImage(index + 1)
         imageObj.src = images[index]
 
-      loadImage(0)
+      loadImage()
