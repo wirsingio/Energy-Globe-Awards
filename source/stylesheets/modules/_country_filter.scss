@@ -4,56 +4,43 @@
 @import "settings/grid_layout";
 
 .country-filter {
+
+  position: relative;
+
   > .headline {
     @include screenreaders-only;
   }
 
   > .select {
-    background: $box-background;
-    min-height: $gutter;
+    display: block;
+    width: 100%;
+    height: $gutter;
+    padding-left: 6px;
+    color: $text-color;
+    border: none;
+    border-radius: 0px; // Removes Chrome border-radius
 
-    .ng-ms {
-      border: none;
-      box-shadow: none;
-      position: relative;
+    // Render dropdown triangle
+    @include appearance(none); // Avoid native dropdown appearance
+    background: $box-background url('/images/dropdown-triangle.svg') no-repeat;
+    background-position: 94%;
 
-      // Adds CSS triangle to the select box
-      &:before {
-        position: absolute;
-        top: calc(50% - 1px); // always center it
-        right: 8px;
-        display: inline-block;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #CCC;
-        border-left: 5px solid transparent;
-        border-bottom-color: rgba(0, 0, 0, 0.2);
-        content: '';
-      }
+    // Clip long country names with an ellipsis (only works in FF / Safari)
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 
-      input {
-        background: inherit;
-        height: $gutter;
-        margin-top: 0;
-        line-height: $gutter;
+    // Other browsers will clip the text on the right padding
+    padding-right: 30px;
 
-        &:hover {
-          @include placeholder {
-            color: $text-color;
-          }
-        }
-      }
+    &:focus {
+      outline: 0px; // Avoid blue focus outline in Chrome
     }
 
-    .ng-ms-selector {
-      border: none;
-
-      ul {
-        border: 1px solid $box-background;
-
-        &:empty {
-          border: none;
-        }
-      }
+    // Hack for Firefox to avoid the dotted-border on focusing select
+    &:-moz-focusring {
+      color: transparent; // This would also render the text transparent
+      text-shadow: 0 0 0 $text-color; // So we replace text color with shadow
     }
   }
 }
