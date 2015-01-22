@@ -1,4 +1,3 @@
-
 {filter, utils} = wirsing
 
 EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
@@ -11,6 +10,14 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
     year:      names: [], filterMap: {}
     countries: names: [], selected: []
     searchTerm: ''
+
+  $scope.categoryNames =
+    fire: 'Feuer'
+    water: 'Wasser'
+    air: 'Luft'
+    earth: 'Erde'
+    youth: 'Jugend'
+    other: 'Andere'
 
   configurePipeline = ->
     filterPipeline.setCategoryChoices $scope.filters.category.filterMap
