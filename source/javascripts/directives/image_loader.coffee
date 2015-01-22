@@ -1,9 +1,14 @@
-EGA.directive 'imageSuggestions', ->
-  restrict: 'A'
+EGA.directive 'awardHeader', ->
+  restrict: 'E'
   scope:
-    imageSuggestions: '='
+    award: '='
+  transclude: true
+  replace: true
+  template: "<header ng-transclude></header>"
   link: (scope, element, attrs) ->
-    scope.$watch 'imageSuggestions', (images) ->
+    scope.$watch 'award', (award) ->
+      images = award.images
+
       loadImage = (index = 0) ->
         return if index >= images.length
 

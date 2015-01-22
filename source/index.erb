@@ -63,9 +63,9 @@ title: Energy Globe Award
     <ul class="awards-list">
       <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
         <a href="http://www.energyglobe.at/{{ award.details_link }}">
-          <header image-suggestions="award.images">
+          <award-header award="award">
             <span class="category">{{ award.category }}</span>
-          </header>
+          </award-header>
           <div class="text">
             <div class="year">{{ award.year }}</div>
             <div class="country">{{ award.country }}</div>
