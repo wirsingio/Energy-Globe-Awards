@@ -24,7 +24,7 @@
       max-width: inherit;
       width: 100%;
       pointer-events: none;
-      // Seems to be necessary for IE to replicate pointer-events.
+      // background seems to be necessary for IE to replicate pointer-events.
       // TODO: Check during browser testing
       background: none !important;
       z-index: 1;
