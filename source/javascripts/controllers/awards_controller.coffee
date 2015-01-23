@@ -19,10 +19,8 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
     filterPipeline.setCountryChoices filter.helper.trueMap(getShownCountries())
 
   getShownCountries = ->
-    if not $scope.filters.countries.selected?
-      $scope.filters.countries.names # show all
-    else
-      [$scope.filters.countries.selected] # show the selected one
+    {countries} = $scope.filters
+    if countries.selected? then [countries.selected] else countries.names
 
   filterAwards = -> $scope.filteredAwards = filterPipeline.filterFirstPage($scope.awards)
 
