@@ -3,20 +3,108 @@
 @import "settings/grid_layout";
 
 .page-header {
-  background: $header-background url('/images/header-bg.svg');
+  //background: $header-background url('/images/header-bg.svg');
+  background: $header-background;
   color: $header-color;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   @include box-sizing(border-box);
+  position: relative;
+  overflow: hidden;
+
+  .container:after {
+    content: "";
+    background: url('/images/wirsing-logo-neutral.svg');
+    background-size: 1500px 1500px;
+    position: absolute;
+    top: 0;
+    left: -400px;
+    width: 1500px;
+    height: 1500px;
+    opacity: 0.05;
+
+    @include keyframes(scale) {
+      0% {
+        @include transform(scale(1));
+      }
+
+      50% {
+        @include transform(scale(1.4));
+      }
+
+      100% {
+        @include transform(scale(1));
+      }
+    }
+
+    @include animation(scale 60s ease-in-out);
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    margin-bottom: $gutter;
+  }
 
   a {
     color: inherit;
   }
 
+  .title {
+    font-weight: normal;
+    font-size: golden-ratio(1em, 3);
+    margin-top: 8px;
+    line-height: 1.1em;
+  }
+
   .headline {
-    font-size: golden-ratio(16px, 1);
+    font-size: golden-ratio(1em, 1);
   }
 
   .info {
     line-height: 1.7em;
+    text-shadow: 1px 1px 35px black;
+  }
+
+  .wirsing_energy_globe {
+    $logo-color: darken($wirsing-green, 25%);
+    height: 150px;
+    position: relative;
+    z-index: 1;
+ 
+    .plug {
+      .chord {
+        stroke: $logo-color;
+      }
+
+      .end {
+        path,
+        rect {
+          fill: $logo-color;
+        }
+      }
+    }
+
+    .globe {
+      path {
+        stroke: darken($logo-color, 50%);
+      }
+
+      circle {
+        stroke: $logo-color;
+      }
+    }
+
+    .logo {
+      $wirsing-logo-color: darken($logo-color, 5%);
+
+      circle {
+        stroke: $wirsing-logo-color;
+      }
+
+      path {
+        stroke: none;
+        fill: $wirsing-logo-color;
+      }
+    }
   }
 }

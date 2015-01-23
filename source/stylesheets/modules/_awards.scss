@@ -75,6 +75,7 @@
 
   .organization {
     color: lighten($text-color, 20%);
+    @include ellipsis(50%);
   }
 
   .country,

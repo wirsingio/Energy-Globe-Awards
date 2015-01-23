@@ -6,8 +6,11 @@
   @include outer-container;
   padding: $gutter 0;
 
+  .wirsing_energy_globe {
+    @include span-columns(1);
+  }
+
   .content {
-    @include shift(1);
     @include span-columns(3);
   }
 }
