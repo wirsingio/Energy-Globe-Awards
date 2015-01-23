@@ -26,9 +26,7 @@
     background-position: 94% 53%;
 
     // Clip long country names with an ellipsis (only works in FF / Safari)
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    @include ellipsis;
 
     // Other browsers will clip the text on the right padding
     padding-right: 30px;
