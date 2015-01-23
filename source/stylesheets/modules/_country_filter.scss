@@ -18,7 +18,7 @@
     padding-left: 6px;
     color: $text-color;
     border: none;
-    border-radius: 0px; // Removes Chrome border-radius
+    border-radius: 0; // Removes Chrome border-radius
 
     // Render dropdown triangle
     @include appearance(none); // Avoid native dropdown appearance
@@ -34,7 +34,7 @@
     padding-right: 30px;
 
     &:focus {
-      outline: 0px; // Avoid blue focus outline in Chrome
+      outline: 0; // Avoid blue focus outline in Chrome
     }
 
     // Hack for Firefox to avoid the dotted-border on focusing select
