@@ -26,12 +26,31 @@ describe 'Reprocess' do
     raw.split("\n").size.must_equal 6
   end
 
-  it 'adds hyphens' do
-    # title is "Sägespäne aus Brennstoff zum Kochen und Heizen"
+  it "removes descriptions" do
+
+  end
+
+  it 'adds hyphens to titles' do
     raw_dest = File.read(@dest)
     dest_list = JSON.load(raw_dest)
     title = dest_list.last['title']
     title.must_match(/&shy;/)
+  end
+
+  it 'adds hyphens to orgs' do
+    raw_dest = File.read(@dest)
+    dest_list = JSON.load(raw_dest)
+    organization = dest_list.last['organization']
+    organization.must_match(/&shy;/)
+  end
+
+  it 'removes the award descriptions' do
+    raw_dest = File.read(@dest)
+    dest_list = JSON.load(raw_dest)
+    descriptions = dest_list.map { |award|
+      award['description']
+    }.compact
+    descriptions.size.must_equal 0
   end
 
   it "consolidates categories" do

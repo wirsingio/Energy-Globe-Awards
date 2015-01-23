@@ -14,6 +14,7 @@ class Reprocess
   def reprocess
     load_file
     reverse
+    remove_descriptions
     hyphenate
     filter_categories
     print_to_file
@@ -28,11 +29,18 @@ class Reprocess
     @json = @json.reverse
   end
 
+  def remove_descriptions
+    @json.map! { |item|
+      item.delete('description')
+      item
+    }
+  end
+
   def hyphenate
     hh = Text::Hyphen.new(:language => 'de', :left => 2, :right => 2)
     @json = @json.map { |award|
       award['title'] = hyphenate_sentence(award['title'], hh)
-      award['description'] = hyphenate_sentence(award['description'], hh)
+      award['organization'] = hyphenate_sentence(award['organization'], hh)
       award
     }
   end
