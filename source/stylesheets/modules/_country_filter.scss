@@ -23,7 +23,7 @@
     // Render dropdown triangle
     @include appearance(none); // Avoid native dropdown appearance
     background: $box-background url('/images/dropdown-triangle.svg') no-repeat;
-    background-position: 94%;
+    background-position: 94% 53%;
 
     // Clip long country names with an ellipsis (only works in FF / Safari)
     text-overflow: ellipsis;
