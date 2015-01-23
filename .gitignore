@@ -14,4 +14,6 @@ tmp/cache/*.cache
 .DS_Store
 
 vendor/assets/components/*
+
+data/injectable.yml
 source/data/awards_processed.json
