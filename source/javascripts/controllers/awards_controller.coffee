@@ -1,7 +1,7 @@
 
 {filter, utils} = wirsing
 
-EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
+EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
 
   # setup view scope
   $scope.awards = []
@@ -39,6 +39,9 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
 
   # react to changes of filter configurations
   $scope.$watch 'filters', utils.chain([configurePipeline, filterAwards]), true
+
+  # make &shy; html safe
+  $scope.sanitizeHTML = (text) -> $sce.trustAsHtml(text)
 
   # fetch awards
   $http.get("data/awards.json").then (result) -> $scope.awards = result.data

@@ -69,8 +69,8 @@ title: Energy Globe Award
           <div class="text">
             <div class="year">{{ award.year }}</div>
             <div class="country">{{ award.country }}</div>
-            <h3 class="title">{{ award.title }}</h3>
-            <div class="organization">{{ award.organization }}</div>
+            <h3 class="title" ng-bind-html="sanitizeHTML(award.title)"></h3>
+            <div class="organization" ng-bind-html="sanitizeHTML(award.organization)"></div>
           </div>
         </a>
       </li>
