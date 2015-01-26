@@ -1,7 +1,7 @@
 
 {filter, utils} = wirsing
 
-EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
+EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
 
   # setup view scope
   $scope.awards = []
@@ -9,19 +9,18 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
   $scope.filters =
     category:  names: [], filterMap: {}
     year:      names: [], filterMap: {}
-    countries: names: [], selected: []
+    countries: names: [], selected: null
     searchTerm: ''
 
   configurePipeline = ->
     filterPipeline.setCategoryChoices $scope.filters.category.filterMap
     filterPipeline.setYearChoices $scope.filters.year.filterMap
     filterPipeline.setSearchTerm $scope.filters.searchTerm
+    filterPipeline.setCountryChoices filter.helper.trueMap(getShownCountries())
 
+  getShownCountries = ->
     {countries} = $scope.filters
-    shownCountries = if anyCountriesSelected() then countries.selected else countries.names
-    filterPipeline.setCountryChoices filter.helper.trueMap(shownCountries)
-
-  anyCountriesSelected = -> $scope.filters.countries.selected.length > 0
+    if countries.selected? then [countries.selected] else countries.names
 
   filterAwards = -> $scope.filteredAwards = filterPipeline.filterFirstPage($scope.awards)
 
@@ -40,6 +39,9 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
 
   # react to changes of filter configurations
   $scope.$watch 'filters', utils.chain([configurePipeline, filterAwards]), true
+
+  # make &shy; html safe
+  $scope.sanitizeHTML = (text) -> $sce.trustAsHtml(text)
 
   # fetch awards
   $http.get("data/awards.json").then (result) -> $scope.awards = result.data

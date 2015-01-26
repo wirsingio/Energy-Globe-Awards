@@ -51,12 +51,12 @@ title: Energy Globe Award
 
       <section class="country-filter">
         <h2 class="headline">Länder</h2>
-        <div multi-select
-             options="filters.countries.names"
-             selected="filters.countries.selected"
-             placeholder='Alle Länder …'
-             class="select">
-        </div>
+        <select ng-model="filters.countries.selected"
+                ng-options="name as name for name in filters.countries.names"
+                class="select">
+
+          <option value=''>Alle Länder …</option>
+        </select>
       </section>
     </div>
   </div>
@@ -66,15 +66,14 @@ title: Energy Globe Award
     <ul class="awards-list">
       <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
         <a href="http://www.energyglobe.at/{{ award.details_link }}">
-          <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="image" ng-if="award.images[0]">
-          <header class="category" ng-if="!award.images[0]">
-            {{ award.category }}
-          </header>
+          <award-header award="award">
+            <span class="category">{{ award.category }}</span>
+          </award-header>
           <div class="text">
             <div class="year">{{ award.year }}</div>
             <div class="country">{{ award.country }}</div>
-            <h3 class="title">{{ award.title }}</h3>
-            <div class="organization">{{ award.organization }}</div>
+            <h3 class="title" ng-bind-html="sanitizeHTML(award.title)"></h3>
+            <div class="organization" ng-bind-html="sanitizeHTML(award.organization)"></div>
           </div>
         </a>
       </li>
