@@ -3,4 +3,4 @@ $column: 180px;
 $gutter: 30px;
 
 $footer-height: 2 * $gutter;
-
+$awards-vertical-spacing: golden-ratio($gutter, -1);

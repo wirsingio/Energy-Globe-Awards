@@ -31,7 +31,7 @@
       > .input-filters {
         margin-top: -$gutter;
         padding-top: $gutter;
-        height: 2*$gutter + golden-ratio($gutter, -1);
+        height: 2*$gutter + $awards-vertical-spacing;
         background: white;
       }
 
@@ -64,17 +64,17 @@
   .awards {
     @include span-columns(3);
     margin-bottom: $footer-height;
-    margin-top: golden-ratio($gutter, -1);
+    margin-top: $awards-vertical-spacing;
 
     .award {
       @include span-columns(1 of 3);
       @include omega(3n);
-      margin-bottom: golden-ratio($gutter, -1);
+      margin-bottom: $awards-vertical-spacing;
     }
   }
 
   .year-filter, .category-filter {
     // Keep them aligned with the awards list
-    margin-top: $gutter + golden-ratio($gutter, -1);
+    margin-top: $gutter + $awards-vertical-spacing;
   }
 }
