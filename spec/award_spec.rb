@@ -1,10 +1,4 @@
-$:.unshift File.expand_path('../../lib', __FILE__)
-require 'energy_globe_awards'
-
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'minitest/pride'
-require 'minitest/focus'
+require File.expand_path('../spec_helper', __FILE__)
 
 BASEURL   = "http://www.energyglobe.at"
 AWARDSURL = "%s/awards/" % BASEURL
