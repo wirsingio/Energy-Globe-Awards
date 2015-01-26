@@ -1,9 +1,26 @@
+@import "mixins/accessibility";
 @import "mixins/lists";
 @import "mixins/text";
 
 .year-filter {
+
+  > .headline {
+    @include screenreaders-only;
+  }
+
   > .choices-list {
     @include choices-list;
+    text-align: right;
+
+    label {
+      display: inline-block;
+      padding-right: 25px;
+      background: url('/images/checkbox-empty.svg') no-repeat right center;
+    }
+
+    [type=checkbox]:checked + label {
+      background: url('/images/checkbox-checked.svg') no-repeat right center;
+    }
   }
 
   > .headline {
