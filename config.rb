@@ -7,6 +7,12 @@
 sprockets.append_path File.join root, 'vendor/assets/components'
 
 ###
+# Analytics Tracking
+###
+
+set :analytics_tracking_id, "UA-58999116-1"
+
+###
 # Compass
 ###
 
