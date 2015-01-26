@@ -30,28 +30,25 @@ class Reprocess
   end
 
   def remove_descriptions
-    @json.map! { |item|
+    @json.each do |item|
       item.delete('description')
-      item
-    }
+    end
   end
 
   def hyphenate
     hh = Text::Hyphen.new(:language => 'de', :left => 2, :right => 2)
-    @json = @json.map { |award|
+    @json = @json.each do |award|
       award['title'] = hyphenate_sentence(award['title'], hh)
       award['organization'] = hyphenate_sentence(award['organization'], hh)
-      award
-    }
+    end
   end
 
   def filter_categories
-    @json.map! { |item|
+    @json.each do |item|
       unless VALID_CATEGORIES.include?(item['category'])
         item['category'] = 'other'
       end
-      item
-    }
+    end
   end
 
   def print_to_file
