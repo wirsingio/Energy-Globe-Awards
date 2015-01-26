@@ -27,7 +27,6 @@ class Reprocess
     'Viet Nam' => 'Vietnam'
   }
 
-
   def initialize source, destination
     @source      = source
     @destination = destination
