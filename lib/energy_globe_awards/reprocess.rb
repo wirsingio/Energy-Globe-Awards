@@ -1,9 +1,32 @@
 require 'json'
 require 'text/hyphen'
+require 'yaml'
 
 
 class Reprocess
   VALID_CATEGORIES = %w(earth air water fire youth other)
+  GERMAN_COUNTRIES = YAML.load(File.open('data/de.yml'))['de']['countries']
+  ENGLISH_COUNTRIES = YAML.load(File.open('data/en.yml'))['en']['countries']
+  COUNTRY_SANITATIONS = {
+    'Bolivia, Plurinational State of' => 'Bolivia',
+    'Bosnia and Herzegovina' => 'Bosnia & Herzegovina',
+    'Congo, The Democratic Republic of the' => 'Congo - Kinshasa',
+    'Holy See (Vatican City State)' => 'Vatican City',
+    'Iran, Islamic Republic of' => 'Iran',
+    "Korea, Democratic People's Republic of" => 'North Korea',
+    'Korea, Republic of' => 'South Korea',
+    "Lao People's Democratic Republic" => 'Laos',
+    'Micronesia, Federated States of' => 'Micronesia',
+    'Moldova, Republic of' => 'Moldova',
+    'Myanmar' => 'Myanmar (Burma)',
+    'Palestine, State of' => 'Palestinian Territories',
+    'Russian Federation' => 'Russia',
+    'Saint Vincent and the Grenadines' => 'St. Vincent & Grenadines',
+    'Syrian Arab Republic' => 'Syria',
+    'Tanzania, United Republic of' => 'Tanzania',
+    'Viet Nam' => 'Vietnam'
+  }
+
 
   def initialize source, destination
     @source      = source
@@ -17,6 +40,7 @@ class Reprocess
     remove_descriptions
     hyphenate
     filter_categories
+    translate_countries
     print_to_file
   end
 
@@ -75,5 +99,14 @@ class Reprocess
       .map { |word|
         hyphenator.visualize(word, "&shy;") }
       .join(" ")
+  end
+
+  def translate_countries
+    @json.each do |award|
+      country = COUNTRY_SANITATIONS[award['country']] || award['country']
+      country_code = ENGLISH_COUNTRIES.key(country)
+      fail %{Cannot translate '#{award["country"]}'} unless country_code
+      award['country'] = GERMAN_COUNTRIES[country_code]
+    end
   end
 end
