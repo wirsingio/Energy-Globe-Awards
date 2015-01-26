@@ -52,7 +52,7 @@ class Reprocess
   end
 
   def print_to_file
-    File.open(@destination, 'w') { |f|
+    File.open(@destination, 'w') do |f|
       f << "["
       f << "\n#{JSON.dump(@json.shift)}"
       @json.each do |line|
@@ -60,7 +60,7 @@ class Reprocess
         f << JSON.dump(line)
       end
       f << "\n]"
-    }
+    end
   end
 
   private
