@@ -27,7 +27,9 @@ describe 'Reprocess' do
   end
 
   it "removes descriptions" do
-
+    with_descriptions = @dest_list.reject { |item|
+      item['description'].nil? }
+    with_descriptions.size.must_equal 0
   end
 
   it 'adds hyphens to titles' do
