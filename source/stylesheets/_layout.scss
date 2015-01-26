@@ -39,6 +39,15 @@
         @include shift(1);
         margin-top: 2 * $gutter;
       }
+
+      // Fixes a bug where awards can not be hovered correctly
+      // when they are covered by the fixed area
+      pointer-events: none;
+
+      // Re-enables interaction with filters
+      .input-filters, .year-filter, .category-filter {
+        pointer-events: auto;
+      }
     }
   }
 
