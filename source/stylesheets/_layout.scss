@@ -2,16 +2,22 @@
 @import "settings/grid_layout";
 @import "neat";
 
-.page-header > .container {
-  @include outer-container;
-  padding: $gutter 0;
+.page-header {
+  height: 400px;
+  > .container {
+    @include outer-container;
+    padding: $gutter 0;
+  }
+}
 
-  .wirsing_energy_globe {
-    @include span-columns(1);
+.explanation {
+  .container {
+    @include outer-container;
   }
 
-  .content {
-    @include span-columns(3);
+  .info {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 

@@ -1,0 +1,30 @@
+@import "bourbon";
+@import "mixins/fonts";
+@import "settings/colors";
+@import "settings/grid_layout";
+
+.explanation {
+
+  background-color: $explanation-background;
+  color: $explanation-color;
+  overflow: hidden;
+  text-align: center;
+
+  .wrapper {
+    margin: 15px 0;
+    border-top: 1px solid lighten($explanation-background, 5);
+    border-bottom: 1px solid lighten($explanation-background, 5);
+  }
+
+  .info {
+    @include font-raleway;
+    font-size: 18px;
+    line-height: 34px;
+    padding: 20px 0;
+
+    a {
+      color: inherit;
+    }
+  }
+
+}

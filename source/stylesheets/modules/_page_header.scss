@@ -1,110 +1,32 @@
 @import "bourbon";
+@import "mixins/fonts";
 @import "settings/colors";
 @import "settings/grid_layout";
 
 .page-header {
-  //background: $header-background url('/images/header-bg.svg');
-  background: $header-background;
-  color: $header-color;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  @include box-sizing(border-box);
   position: relative;
+  color: $header-color;
   overflow: hidden;
+  text-align: center;
 
-  .container:after {
-    content: "";
-    background: url('/images/wirsing-logo-neutral.svg');
-    background-size: 1500px 1500px;
+  .background {
+    min-width: 100%;
+    display: block;
     position: absolute;
     top: 0;
-    right: -400px;
-    width: 1500px;
-    height: 1500px;
-    opacity: 0.05;
-
-    @include keyframes(scale) {
-      0% {
-        @include transform(scale(1));
-      }
-
-      50% {
-        @include transform(scale(1.4));
-      }
-
-      100% {
-        @include transform(scale(1));
-      }
-    }
-
-    @include animation(scale 60s ease-in-out);
-  }
-
-  .content {
-    position: relative;
-    z-index: 1;
-    margin-bottom: $gutter;
-  }
-
-  a {
-    color: inherit;
+    z-index: -1;
   }
 
   .title {
-    font-weight: normal;
-    font-size: golden-ratio(1em, 3);
-    margin-top: 8px;
-    line-height: 1.1em;
+    font-size: 48px;
+    margin: 50px 0 0 0;
   }
 
   .headline {
-    font-size: golden-ratio(1em, 1);
+    font-size: 24px;
   }
 
-  .info {
-    line-height: 1.7em;
-    text-shadow: 1px 1px 35px black;
-  }
-
-  .wirsing_energy_globe {
-    $logo-color: darken($wirsing-green, 25%);
-    height: 150px;
-    position: relative;
-    z-index: 1;
- 
-    .plug {
-      .chord {
-        stroke: $logo-color;
-      }
-
-      .end {
-        path,
-        rect {
-          fill: $logo-color;
-        }
-      }
-    }
-
-    .globe {
-      path {
-        stroke: darken($logo-color, 50%);
-      }
-
-      circle {
-        stroke: $logo-color;
-      }
-    }
-
-    .logo {
-      $wirsing-logo-color: darken($logo-color, 5%);
-
-      circle {
-        stroke: $wirsing-logo-color;
-      }
-
-      path {
-        stroke: none;
-        fill: $wirsing-logo-color;
-      }
-    }
+  h1, h2 {
+    @include font-raleway;
   }
 }
