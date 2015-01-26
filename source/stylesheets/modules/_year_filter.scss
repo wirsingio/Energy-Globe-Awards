@@ -12,6 +12,10 @@
     @include choices-list;
     text-align: right;
 
+    label {
+      padding-right: 25px;
+    }
+
     .checkbox-icon {
       right: 0;
     }
