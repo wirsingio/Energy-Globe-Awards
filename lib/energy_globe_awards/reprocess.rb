@@ -36,9 +36,15 @@ class Reprocess
   end
 
   def hyphenate
-    hh = Text::Hyphen.new(:language => 'de', :left => 2, :right => 2)
+    # right and left mean no fewer than this number of letters
+    # will show up to the left or right of the hyphen.
+    hypenetor = Text::Hyphen.new(
+      language: 'de',
+      left:  2,
+      right: 2
+    )
     @json = @json.each do |award|
-      award['title'] = hyphenate_sentence(award['title'], hh)
+      award['title'] = hyphenate_sentence(award['title'], hypenetor)
       award['organization'] = hyphenate_sentence(award['organization'], hh)
     end
   end
