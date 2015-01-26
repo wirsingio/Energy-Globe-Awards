@@ -25,6 +25,7 @@ title: Energy Globe Award
         <li ng-repeat="year in filters.year.names">
           <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
           <label for="year_checkbox_{{year}}">{{year}}</label>
+          <%= sprockets.find_asset('checkbox.svg').to_s %>
         </li>
       <ul>
     </section>
