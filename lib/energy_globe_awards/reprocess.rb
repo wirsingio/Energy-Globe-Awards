@@ -8,7 +8,7 @@ class Reprocess
   def initialize source, destination
     @source      = source
     @destination = destination
-    @json        = nil
+    @json        = []
   end
 
   def reprocess
@@ -19,6 +19,8 @@ class Reprocess
     filter_categories
     print_to_file
   end
+
+  private
 
   def load_file
     raw   = File.read(@source)
@@ -67,8 +69,6 @@ class Reprocess
     end
   end
 
-  private
-
   def hyphenate_sentence sentence, hyphenator
     sentence
       .split(" ")
@@ -76,6 +76,4 @@ class Reprocess
         hyphenator.visualize(word, "&shy;") }
       .join(" ")
   end
-
-
 end
