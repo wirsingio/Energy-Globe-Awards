@@ -25,8 +25,10 @@ EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
   filterAwards = -> $scope.filteredAwards = filterPipeline.filterFirstPage($scope.awards)
 
   initializeFilters = ->
+    $scope.filters.year.names = filter.helper.keys $scope.awards, 'year'
+    $scope.filters.category.names = ['earth', 'water', 'fire', 'air', 'youth', 'other']
+
     for type in ['category', 'year']
-      $scope.filters[type].names = filter.helper.keys($scope.awards, type).sort()
       $scope.filters[type].filterMap = filter.helper.trueMap($scope.filters[type].names)
 
     $scope.filters.countries.names = filter.helper.keys($scope.awards, 'country').sort()
