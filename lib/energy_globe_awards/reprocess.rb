@@ -65,7 +65,7 @@ class Reprocess
       @json.each do |line|
         f << ",\n#{JSON.dump(line)}"
       end
-      f << "\n]"
+      f << "\n]\n"
     end
   end
 
