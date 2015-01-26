@@ -1,6 +1,6 @@
 {filter, utils} = wirsing
 
-EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
+EGA.controller "AwardsController", ($scope, $http, filterPipeline, categoryTranslation) ->
 
   # setup view scope
   $scope.awards = []
@@ -10,14 +10,7 @@ EGA.controller "AwardsController", ($scope, $http, filterPipeline) ->
     year:      names: [], filterMap: {}
     countries: names: [], selected: []
     searchTerm: ''
-
-  $scope.categoryNames =
-    fire: 'Feuer'
-    water: 'Wasser'
-    air: 'Luft'
-    earth: 'Erde'
-    youth: 'Jugend'
-    other: 'Andere'
+  $scope.translateCategory = categoryTranslation.translate
 
   configurePipeline = ->
     filterPipeline.setCategoryChoices $scope.filters.category.filterMap

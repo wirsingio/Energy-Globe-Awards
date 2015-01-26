@@ -35,7 +35,7 @@ title: Energy Globe Award
       <ul class="choices-list">
         <li ng-repeat="category in filters.category.names" class="is-{{ category }}">
           <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
-          <label for="category_checkbox_{{category}}" class="choice-label">{{ categoryNames[category]}}</label>
+          <label for="category_checkbox_{{category}}" class="choice-label">{{ translateCategory(category) }}</label>
         </li>
       </ul>
     </section>
@@ -65,7 +65,7 @@ title: Energy Globe Award
         <a href="http://www.energyglobe.at/{{ award.details_link }}">
           <img src="{{ award.images[0] }}" alt="Bild von {{ award.title }}" class="image" ng-if="award.images[0]">
           <header class="category" ng-if="!award.images[0]">
-            {{ categoryNames[award.category] }}
+            {{ translateCategory(award.category) }}
           </header>
           <div class="text">
             <div class="year">{{ award.year }}</div>
