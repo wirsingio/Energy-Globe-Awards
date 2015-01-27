@@ -2,13 +2,22 @@
 @import "settings/grid_layout";
 @import "neat";
 
-.page-header > .container {
-  @include outer-container;
-  padding: $gutter 0;
+.page-header {
+  height: 400px;
+  > .container {
+    @include outer-container;
+    padding: $gutter 0;
+  }
+}
 
-  .content {
-    @include shift(1);
-    @include span-columns(3);
+.explanation {
+  .container {
+    @include outer-container;
+  }
+
+  .info {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 

@@ -14,7 +14,7 @@
   }
 
   .award {
-    $box-shadow-color: rgba(0,0,0,0.1); 
+    $box-shadow-color: rgba(0,0,0,0.1);
     $box-background: #EEE;
     @include transition(all 0.1s ease-in-out);
     box-shadow: 0 0 0 $box-shadow-color;
