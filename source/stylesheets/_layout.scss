@@ -21,7 +21,7 @@
   }
 }
 
-.awards-app {
+.main-content {
   @include outer-container;
 
   .filters {
@@ -79,6 +79,21 @@
       @include span-columns(1 of 3);
       @include omega(3n);
       margin-top: golden-ratio($gutter, -1);
+    }
+  }
+
+  .text-column {
+    @include span-columns(3);
+    @include shift(1);
+
+    .persons {
+      @include outer-container;
+      p {
+        @include span-columns(1 of 3);
+        &:last-child {
+          @include omega;
+        }
+      }
     }
   }
 }
