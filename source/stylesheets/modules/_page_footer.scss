@@ -17,21 +17,21 @@
     vertical-align: middle;
 
     path {
-      fill: $wirsing-green;
+      fill: $wirsing-logo-color;
     }
 
     circle {
-      stroke: $wirsing-green;
+      stroke: $wirsing-logo-color;
     }
   }
 
   > .wirsing-link {
-    color: $wirsing-green;
+    color: $wirsing-logo-color;
     text-decoration: none;
     padding-right: 0.2em;
 
     &:hover {
-      $hover-color: lighten($wirsing-green, 10%);
+      $hover-color: lighten($wirsing-logo-color, 10%);
       color: $hover-color;
 
       #wirsing_logo {
