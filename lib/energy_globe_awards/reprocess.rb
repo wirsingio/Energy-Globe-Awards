@@ -102,7 +102,7 @@ class Reprocess
 
   def translate_countries
     @json.each do |award|
-      country = satitize_country(award['country'])
+      country = sanitize_country(award['country'])
       country_code = ENGLISH_COUNTRIES.key(country)
       fail %{Cannot translate '#{award["country"]}'} unless country_code
       award['country'] = GERMAN_COUNTRIES[country_code]
