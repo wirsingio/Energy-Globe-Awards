@@ -1,4 +1,3 @@
-
 {filter, utils} = wirsing
 
 EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
