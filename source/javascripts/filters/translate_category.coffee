@@ -1,4 +1,4 @@
-EGA.service "categoryTranslation", ->
+EGA.filter "translateCategory", ->
   translations =
     fire: 'Feuer'
     water: 'Wasser'
@@ -7,6 +7,4 @@ EGA.service "categoryTranslation", ->
     youth: 'Jugend'
     other: 'Andere'
 
-  return {
-    translate: (english) -> translations[english]
-  }
+  return (english) -> translations[english]

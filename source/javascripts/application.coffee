@@ -5,3 +5,4 @@
 #= require_directory ./services
 #= require_directory ./controllers
 #= require_directory ./directives
+#= require_directory ./filters
