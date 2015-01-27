@@ -85,5 +85,16 @@
   .text-column {
     @include span-columns(3);
     @include shift(1);
+    text-align: center;
+
+    .persons {
+      @include outer-container;
+      p {
+        @include span-columns(1 of 3);
+        &:last-child {
+          @include omega;
+        }
+      }
+    }
   }
 }
