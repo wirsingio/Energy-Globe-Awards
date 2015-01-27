@@ -21,7 +21,7 @@
   }
 }
 
-.awards-app {
+.main-content {
   @include outer-container;
 
   .filters {
@@ -94,5 +94,20 @@
   .year-filter, .category-filter {
     // Keep them aligned with the awards list
     margin-top: $gutter + $awards-vertical-spacing;
+  }
+
+  .text-column {
+    @include span-columns(3);
+    @include shift(1);
+
+    .persons {
+      @include outer-container;
+      p {
+        @include span-columns(1 of 3);
+        &:last-child {
+          @include omega;
+        }
+      }
+    }
   }
 }

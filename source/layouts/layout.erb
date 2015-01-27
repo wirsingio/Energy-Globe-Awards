@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title><%= yield_content :title %></title>
+    <title><%= current_page.data.title %></title>
 
     <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152-precomposed.png">
     <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
@@ -22,7 +22,15 @@
     <%= stylesheet_link_tag "application" %>
   </head>
 
-  <body ng-app="ega">
+  <body ng-app="ega" id="page-<%= current_page.data.id %>">
+    <header class="page-header">
+      <div class="container">
+        <h1 class="title">Energy Globe Award Gewinner</h1>
+        <h2 class="headline">Die besten Projekte des Global Energy Award auf einem Blick.</h2>
+      </div>
+      <img class="background" src="/images/big-header-fading.jpg" />
+    </header>
+
     <%= yield %>
     <%= javascript_include_tag "application" %>
     <%= partial "templates/analytics" %>
