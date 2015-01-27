@@ -1,20 +1,43 @@
+@import "settings/colors";
+@import "mixins/fonts";
 
-.text-column {
+#page-about {
 
   h1, h2 {
     text-align: center;
   }
 
-  h1 {
-    font-size: 2em;
-    margin: 1.5em 0;
+  .explanation {
+    margin-bottom: 2em;
+
+    h1 {
+      @include font-opensans;
+      font-size: 2em;
+      margin: 1em 0;
+    }
   }
 
-  p {
-    text-align: justify;
+  .text-column {
+
+    h2 {
+      @include font-opensans;
+    }
+
+    p {
+      text-align: justify;
+    }
   }
 
-  .impressum p {
-    text-align: center;
+  .impressum {
+
+    .wirsing-logo {
+      width: 200px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    p {
+      text-align: center;
+    }
   }
 }

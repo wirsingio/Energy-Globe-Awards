@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title><%= yield_content :title %></title>
+    <title><%= current_page.data.title %></title>
 
     <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152-precomposed.png">
     <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
@@ -22,7 +22,7 @@
     <%= stylesheet_link_tag "application" %>
   </head>
 
-  <body ng-app="ega">
+  <body ng-app="ega" id="page-<%= current_page.data.id %>">
     <header class="page-header">
       <div class="container">
         <h1 class="title">Energy Globe Award Gewinner</h1>
@@ -30,19 +30,6 @@
       </div>
       <img class="background" src="/images/big-header-fading.jpg" />
     </header>
-
-    <div class="explanation">
-      <div class="wrapper">
-        <div class="container">
-          <p class="info">
-            Diese Projekte wurden für ihren Fokus auf Ressourcenschonung,
-            Energieeffizienz und Einsatz erneuerbarer Energien mit dem
-            <a href="http://www.energyglobe.at/">Energy Globe Award</a> ausgezeichnet.
-            <a href="/about.html">Mehr erfahren</a>
-          </p>
-        </div>
-      </div>
-    </div>
 
     <%= yield %>
     <%= javascript_include_tag "application" %>
