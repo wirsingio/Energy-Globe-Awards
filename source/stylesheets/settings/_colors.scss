@@ -1,8 +1,11 @@
-$wirsing-green: #91C277;
-
 $text-color: #666;
-$header-background: $wirsing-green;
-$header-color: white;
+$header-background: white;
+$header-color: #333;
+
+$explanation-background: #40728b;
+$explanation-color: white;
+
+$wirsing-logo-color: lighten($explanation-background, 20);
 
 $footer-background: #333;
 $footer-color: #aaa;
