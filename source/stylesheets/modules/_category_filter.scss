@@ -1,20 +1,35 @@
+@import "mixins/accessibility";
 @import "mixins/lists";
 @import "mixins/text";
 @import "settings/colors";
 
 .category-filter {
+
+  > .headline {
+    @include screenreaders-only;
+  }
+
   > .choices-list {
     @include choices-list;
   }
 
-  .choice-label {
-    padding: 0 0.6em;
-    border-left: 2px solid $category-other-color;
+  label {
+    padding-left: 25px;
   }
 
+  .checkbox-icon {
+    left: 0;
+  }
+
+  // Color the checkboxes according to the categories
   @each $category, $category-color in $category-colors {
-    .is-#{$category} .choice-label {
-      border-color: $category-color;
+    .is-#{$category} .checkbox-icon {
+      path {
+        fill: $category-color;
+      }
+      rect {
+        stroke: $category-color;
+      }
     }
   }
 

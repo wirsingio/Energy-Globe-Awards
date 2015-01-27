@@ -1,4 +1,6 @@
 $text-color: #666;
+$dark-text-color: #333;
+
 $header-background: white;
 $header-color: #333;
 
@@ -23,4 +25,5 @@ $category-colors: (earth, $category-earth-color),
                    (fire, $category-fire-color),
                    (water, $category-water-color),
                    (air, $category-air-color),
-                   (youth, $category-youth-color);
+                   (youth, $category-youth-color),
+                   (other, $category-other-color);

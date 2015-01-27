@@ -25,6 +25,7 @@ id: "index"
         <li ng-repeat="year in filters.year.names">
           <input type="checkbox" id="year_checkbox_{{year}}" ng-model="filters.year.filterMap[year]">
           <label for="year_checkbox_{{year}}">{{year}}</label>
+          <%= sprockets.find_asset('checkbox.svg').to_s %>
         </li>
       <ul>
     </section>
@@ -36,6 +37,7 @@ id: "index"
         <li ng-repeat="category in filters.category.names" class="is-{{ category }}">
           <input type="checkbox" id="category_checkbox_{{category}}" ng-model="filters.category.filterMap[category]">
           <label for="category_checkbox_{{category}}" class="choice-label">{{ category | translateCategory }}</label>
+          <%= sprockets.find_asset('checkbox.svg').to_s %>
         </li>
       </ul>
     </section>

@@ -32,7 +32,6 @@
       top: 0;
       max-width: inherit;
       width: 100%;
-      pointer-events: none;
       // background seems to be necessary for IE to replicate pointer-events.
       // TODO: Check during browser testing
       background: none !important;
@@ -41,13 +40,22 @@
       > .input-filters {
         margin-top: -$gutter;
         padding-top: $gutter;
-        height: 2.5 * $gutter;
+        height: 2*$gutter + $awards-vertical-spacing;
         background: white;
       }
 
       + .awards {
         @include shift(1);
         margin-top: 2 * $gutter;
+      }
+
+      // Fixes a bug where awards can not be hovered correctly
+      // when they are covered by the fixed area
+      pointer-events: none;
+
+      // Re-enables interaction with filters
+      .input-filters, .year-filter, .category-filter {
+        pointer-events: auto;
       }
     }
   }
@@ -74,12 +82,18 @@
   .awards {
     @include span-columns(3);
     margin-bottom: $footer-height;
+    margin-top: $awards-vertical-spacing;
 
     .award {
       @include span-columns(1 of 3);
       @include omega(3n);
-      margin-top: golden-ratio($gutter, -1);
+      margin-bottom: $awards-vertical-spacing;
     }
+  }
+
+  .year-filter, .category-filter {
+    // Keep them aligned with the awards list
+    margin-top: $gutter + $awards-vertical-spacing;
   }
 
   .text-column {

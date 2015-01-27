@@ -1,6 +1,7 @@
+@import "settings/colors";
+
 @mixin plain-list {
-  &,
-  & li {
+  &, > li {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -10,26 +11,54 @@
 @mixin choices-list {
   @include plain-list;
 
-  [type=checkbox] {
-    display: none;
-
-    + label {
-      opacity: 0.5;
-      cursor: pointer;
-      text-decoration: line-through;
-    }
-
-    &:checked + label {
-      opacity: 1;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: line-through;
-      }
+  li {
+    margin: 0.7em 0;
+    position: relative;
+    &:first-child {
+      margin-top: -1px;
     }
   }
 
-  li {
-    margin: 0.5em 0;
+  [type=checkbox] {
+    display: none;
+  }
+
+  label {
+    color: $dark-text-color;
+    display: inline-block;
+    opacity: 0.5;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .checkbox-icon {
+    // Hide it behind the label
+    position: absolute;
+    top: 1px;
+    z-index: -1;
+    opacity: 0.5;
+    path {
+      opacity: 0; // Hide check mark by default
+    }
+  }
+
+  label:hover {
+    &, ~ .checkbox-icon {
+      opacity: 1;
+    }
+  }
+
+  [type=checkbox]:checked {
+
+    ~ label, ~ .checkbox-icon, ~ .checkbox-icon path {
+      opacity: 1;
+    }
+
+    ~ label:hover {
+      &, ~ .checkbox-icon {
+        opacity: 0.5;
+      }
+    }
   }
 }
