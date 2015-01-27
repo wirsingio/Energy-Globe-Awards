@@ -85,7 +85,6 @@
   .text-column {
     @include span-columns(3);
     @include shift(1);
-    text-align: center;
 
     .persons {
       @include outer-container;
