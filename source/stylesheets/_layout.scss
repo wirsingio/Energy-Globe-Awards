@@ -81,4 +81,9 @@
       margin-top: golden-ratio($gutter, -1);
     }
   }
+
+  .text-column {
+    @include span-columns(3);
+    @include shift(1);
+  }
 }
