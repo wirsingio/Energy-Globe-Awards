@@ -93,6 +93,9 @@ configure :build do
   # Enable cache buster
   activate :asset_hash
 
+  # GZIP text files like css and js
+  activate :gzip
+
   # Generate favicons
   activate :favicon_maker, icons: {
     "_favicon_template.png" => [
