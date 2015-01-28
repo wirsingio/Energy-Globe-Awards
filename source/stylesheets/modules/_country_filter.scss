@@ -41,5 +41,16 @@
       color: transparent; // This would also render the text transparent
       text-shadow: 0 0 0 $text-color; // So we replace text color with shadow
     }
+
+    // Hides the ugly dropdown arrow on IE 10+
+    &::-ms-expand{
+      display:none;
+    }
+
+    // Dont show ugly blue background on focus IE 10+
+    &::-ms-value {
+      background: none;
+      color: $text-color;
+    }
   }
 }
