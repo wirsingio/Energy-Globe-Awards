@@ -47,4 +47,3 @@ EGA.controller "AwardsController", ($scope, $http, $sce, $window, filterPipeline
 
   # fetch awards
   $http.get("data/awards.json").then (result) -> $scope.awards = result.data
-
