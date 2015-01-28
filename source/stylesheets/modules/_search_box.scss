@@ -27,5 +27,10 @@
     &:focus {
       outline: 0px;
     }
+
+    // Don't show the X to clear the input in IE 10+
+    &::-ms-clear {
+      display: none;
+    }
   }
 }

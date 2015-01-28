@@ -1,0 +1,25 @@
+@import "bourbon";
+@import "mixins/accessibility";
+@import "settings/colors";
+@import "settings/grid_layout";
+
+.country-filter {
+
+  .select {
+    padding-right: 0;
+  }
+
+  &:before {
+    display: block;
+    position: absolute;
+    content: '';
+    right: 0;
+    top: 0px;
+    height: $gutter;
+    width: 30px;
+    background: red;
+    z-index: 5;
+    background: $box-background url('/images/dropdown-triangle.svg') no-repeat;
+    background-position: center center;
+  }
+}
