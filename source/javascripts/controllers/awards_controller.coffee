@@ -3,6 +3,7 @@
 EGA.controller "AwardsController", ($scope, $http, $sce, $window, filterPipeline) ->
 
   # setup view scope
+  $scope.awards = []
   $scope.preloadAwards = (awards) -> $scope.awards = awards
 
   $scope.filteredAwards = []
@@ -23,17 +24,16 @@ EGA.controller "AwardsController", ($scope, $http, $sce, $window, filterPipeline
     if countries.selected? then [countries.selected] else countries.names
 
   filterAwards = ->
-    $scope.filteredAwards = if $scope.awards then filterPipeline.filterFirstPage($scope.awards) else []
+    $scope.filteredAwards = filterPipeline.filterFirstPage($scope.awards)
 
   initializeFilters = ->
-    if $scope.awards
-      $scope.filters.year.names = filter.helper.keys($scope.awards,'year').sort().reverse()
-      $scope.filters.category.names = ['earth', 'water', 'fire', 'air', 'youth', 'other']
+    $scope.filters.year.names = filter.helper.keys($scope.awards,'year').sort().reverse()
+    $scope.filters.category.names = ['earth', 'water', 'fire', 'air', 'youth', 'other']
 
-      for type in ['category', 'year']
-        $scope.filters[type].filterMap = filter.helper.trueMap($scope.filters[type].names)
+    for type in ['category', 'year']
+      $scope.filters[type].filterMap = filter.helper.trueMap($scope.filters[type].names)
 
-      $scope.filters.countries.names = filter.helper.keys($scope.awards, 'country').sort()
+    $scope.filters.countries.names = filter.helper.keys($scope.awards, 'country').sort()
 
   # paging function
   $scope.loadNextPage = -> $scope.filteredAwards = filterPipeline.filterNextPage($scope.awards)
