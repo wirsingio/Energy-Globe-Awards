@@ -47,6 +47,7 @@
       display:none;
     }
 
+    // Dont show ugly blue background on focus IE 10+
     &::-ms-value {
       background: none;
       color: $text-color;
