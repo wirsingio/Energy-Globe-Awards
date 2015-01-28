@@ -15,5 +15,5 @@ tmp/cache/*.cache
 
 vendor/assets/components/*
 
-data/injectable.yml
+data/preloaded_awards.yml
 source/data/awards_processed.json

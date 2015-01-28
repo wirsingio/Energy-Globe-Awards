@@ -22,7 +22,7 @@
     <%= stylesheet_link_tag "application" %>
     <script type="text/javascript">
       // Preload <%= data.injectable.size %> records for faster page load
-      window.preloadedAwards = <%= data.injectable.to_json %>;
+      window.preloadedAwards = <%= data.preloaded_awards.to_json %>;
     </script>
   </head>
 
