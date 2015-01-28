@@ -56,4 +56,9 @@ describe 'Reprocess' do
     end
     categories.must_include("other")
   end
+
+  it 'translates countries' do
+    countries = @dest_list.map { |award| award['country'] }
+    countries.must_equal %w{Deutschland Slowakei Brasilien Ghana}
+  end
 end
