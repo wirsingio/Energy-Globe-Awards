@@ -38,8 +38,6 @@ file PRELOAD_DATA_PATH => DATA_DEST_PATH do
   json         = JSON.parse(raw_data)
   first_awards = json[0...record_count]
 
-  File.open(PRELOAD_DATA_PATH, 'w') do |f|
-    f.write(YAML.dump(first_awards))
-  end
+  File.write(PRELOAD_DATA_PATH, YAML.dump(first_awards))
   puts 'Done'
 end
