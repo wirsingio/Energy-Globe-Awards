@@ -29,6 +29,8 @@
     }
 
     // Don't show the X to clear the input in IE 10+
-    &::-ms-clear { display: none; }
+    &::-ms-clear {
+      display: none;
+    }
   }
 }
