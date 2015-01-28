@@ -46,5 +46,10 @@
     &::-ms-expand{
       display:none;
     }
+
+    &::-ms-value {
+      background: none;
+      color: $text-color;
+    }
   }
 }
