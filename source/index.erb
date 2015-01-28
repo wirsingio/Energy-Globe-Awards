@@ -16,7 +16,7 @@ id: "index"
   </div>
 </div>
 
-<div class="awards-app main-content" ng-controller="AwardsController">
+<div class="awards-app main-content" ng-controller="AwardsController" ng-init='preloadAwards(<%= data.preloaded_awards.to_json %>)'>
   <div fix-at-top class="filters">
     <section class="year-filter">
       <h2 class="headline">Jahre</h2>
@@ -66,11 +66,11 @@ id: "index"
       <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
         <a href="http://www.energyglobe.at/{{ award.details_link }}">
           <award-header award="award">
-            <span class="category">{{ award.category | translateCategory }}</span>
+            <span class="category" ng-bind="award.category | translateCategory"></span>
           </award-header>
           <div class="text">
-            <div class="year">{{ award.year }}</div>
-            <div class="country">{{ award.country }}</div>
+            <div class="year" ng-bind="award.year"></div>
+            <div class="country" ng-bind="award.country"></div>
             <h3 class="title" ng-bind-html="sanitizeHTML(award.title)"></h3>
             <div class="organization" ng-bind-html="sanitizeHTML(award.organization)"></div>
           </div>

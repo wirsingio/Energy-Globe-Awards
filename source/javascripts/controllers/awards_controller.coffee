@@ -1,9 +1,11 @@
 {filter, utils} = wirsing
 
-EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
+EGA.controller "AwardsController", ($scope, $http, $sce, $window, filterPipeline) ->
 
   # setup view scope
   $scope.awards = []
+  $scope.preloadAwards = (awards) -> $scope.awards = awards
+
   $scope.filteredAwards = []
   $scope.filters =
     category:  names: [], filterMap: {}
@@ -21,7 +23,8 @@ EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
     {countries} = $scope.filters
     if countries.selected? then [countries.selected] else countries.names
 
-  filterAwards = -> $scope.filteredAwards = filterPipeline.filterFirstPage($scope.awards)
+  filterAwards = ->
+    $scope.filteredAwards = filterPipeline.filterFirstPage($scope.awards)
 
   initializeFilters = ->
     $scope.filters.year.names = filter.helper.keys($scope.awards,'year').sort().reverse()
