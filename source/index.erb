@@ -16,7 +16,7 @@ id: "index"
   </div>
 </div>
 
-<div class="awards-app main-content" ng-controller="AwardsController">
+<div class="awards-app main-content" ng-controller="AwardsController" ng-init='preloadAwards(<%= data.preloaded_awards.to_json %>)'>
   <div fix-at-top class="filters">
     <section class="year-filter">
       <h2 class="headline">Jahre</h2>

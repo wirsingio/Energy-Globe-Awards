@@ -20,10 +20,6 @@
     <link rel="icon" type="image/icon" href="favicon.ico">
 
     <%= stylesheet_link_tag "application" %>
-    <script type="text/javascript">
-      // Preload <%= data.injectable.size %> records for faster page load
-      window.preloadedAwards = <%= data.preloaded_awards.to_json %>;
-    </script>
   </head>
 
   <body ng-app="ega" id="page-<%= current_page.data.id %>">
