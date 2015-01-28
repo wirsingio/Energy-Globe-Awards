@@ -1,9 +1,10 @@
 {filter, utils} = wirsing
 
-EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
+EGA.controller "AwardsController", ($scope, $http, $sce, $window, filterPipeline) ->
 
   # setup view scope
-  $scope.awards = []
+  $scope.awards = $window.preloadedAwards
+
   $scope.filteredAwards = []
   $scope.filters =
     category:  names: [], filterMap: {}
@@ -46,3 +47,4 @@ EGA.controller "AwardsController", ($scope, $http, $sce, filterPipeline) ->
 
   # fetch awards
   $http.get("data/awards.json").then (result) -> $scope.awards = result.data
+
