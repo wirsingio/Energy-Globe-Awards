@@ -24,6 +24,7 @@
 
 .main-content {
   @include outer-container;
+  min-height: 490px;
 
   .filters {
     padding: $gutter 0;
