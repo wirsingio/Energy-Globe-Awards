@@ -42,9 +42,8 @@
   }
 
   header {
-    $height: 3 * $gutter;
-    height: $height;
-    line-height: $height;
+    $max-height: 5 * $gutter;
+    max-height: $max-height;
     text-align: center;
     font-size: golden-ratio(1em, 1);
     overflow: hidden;
@@ -52,6 +51,13 @@
     img {
       width: 100%;
       vertical-align: middle;
+    }
+
+    .category {
+      display: inline-block;
+      position: relative;
+      height: $max-height;
+      top: $max-height / 2.5;
     }
 
     img + .category {
