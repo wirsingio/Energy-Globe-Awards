@@ -17,12 +17,14 @@
 
   .info {
     width: 80%;
+    max-width: 46em;
     margin: 0 auto;
   }
 }
 
 .main-content {
   @include outer-container;
+  min-height: 490px;
 
   .filters {
     padding: $gutter 0;
@@ -89,11 +91,6 @@
       @include omega(3n);
       margin-bottom: $awards-vertical-spacing;
     }
-  }
-
-  .year-filter, .category-filter {
-    // Keep them aligned with the awards list
-    margin-top: $gutter + $awards-vertical-spacing;
   }
 
   .text-column {

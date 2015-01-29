@@ -5,11 +5,14 @@
 .year-filter {
 
   > .headline {
-    @include screenreaders-only;
+    @include filter-headline;
+    float: right;
+    padding-left: 1.5em;
   }
 
   > .choices-list {
     @include choices-list;
+    clear: right;
     text-align: right;
 
     label {
@@ -19,9 +22,5 @@
     .checkbox-icon {
       right: 0;
     }
-  }
-
-  > .headline {
-    @include filter-headline;
   }
 }

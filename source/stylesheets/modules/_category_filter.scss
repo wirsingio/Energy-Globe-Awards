@@ -5,10 +5,6 @@
 
 .category-filter {
 
-  > .headline {
-    @include screenreaders-only;
-  }
-
   > .choices-list {
     @include choices-list;
   }
