@@ -7,7 +7,9 @@ describe 'wirsing.filter.search', ->
     @items = [
       {name: 'Dominik from Vienna', city: 'Vienna'},
       {name: 'Clemens [DönerDöner Kebab]', city: 'Vienna'},
-      {name: 'Aaron', city: 'Klosterneuburg'}
+      {name: 'Aaron', city: 'Klosterneuburg'},
+      {name: 'Vienna', city: 'Dominik'},
+      {name: 'Hyph&shy;ens can be any&shy;where', city: 'Hyphen City'},
     ]
 
   it 'allows to search for a term in specified property', ->
@@ -26,6 +28,10 @@ describe 'wirsing.filter.search', ->
     filter = search term: '(Döner){2} Kebab', in: 'name'
     expect(filter @items).toEqual [@items[1]]
 
+  it 'deals with hyphenated text correctly', ->
+    filter = search term: 'Hyphens can be anywhere', in: 'name'
+    expect(filter @items).toEqual [@items[4]]
+
   # ============ SEARCH TERM ============= #
 
   describe 'configuring search term', ->
@@ -38,7 +44,7 @@ describe 'wirsing.filter.search', ->
       @filter.configure term: 'Dominik'
       expect(@filter.term).toEqual 'Dominik'
       expect(@filter @items).toEqual [@items[0]]
-      
+
   # ============ SEARCH PROPERTY ============= #
 
   describe 'property to search in', ->
@@ -53,7 +59,11 @@ describe 'wirsing.filter.search', ->
     it 'can be changed after creation', ->
       filter = search term: 'Vienna', in: 'city'
       filter.configure in: 'name'
-      expect(filter @items).toEqual [@items[0]]
+      expect(filter @items).toEqual [@items[0], @items[3]]
+
+    it 'can also be multiple', ->
+      filter = search term: 'Vienna', in: ['city', 'name']
+      expect(filter @items).toEqual [@items[0], @items[1], @items[3]]
 
   # ============ MINIMUM CHARACTERS ============= #
 

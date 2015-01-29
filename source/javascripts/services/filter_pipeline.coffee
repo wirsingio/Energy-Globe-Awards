@@ -6,7 +6,7 @@ EGA.service "filterPipeline", ->
   categoryChoices = filter.choices.on 'category'
   yearChoices = filter.choices.on 'year'
   countryChoices = filter.choices.on 'country'
-  search = filter.search in: 'title'
+  search = filter.search in: ['title', 'organization']
   pagination = filter.pagination perPage: 30
   filter = utils.chain [categoryChoices, yearChoices, countryChoices, search, pagination]
 
