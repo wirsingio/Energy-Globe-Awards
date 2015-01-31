@@ -34,4 +34,4 @@ rake middleman_jasmine:ci
 - [unUISlider](https://github.com/leongersen/noUiSlider)
 - [middleman](middlemanapp.com)
 
-LICENSE: MIT
+LICENSE: GPLv3
