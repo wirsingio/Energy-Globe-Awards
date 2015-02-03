@@ -1,3 +1,5 @@
+isBroken = {}
+
 EGA.directive 'awardHeader', ->
   restrict: 'E'
   scope:
@@ -6,15 +8,21 @@ EGA.directive 'awardHeader', ->
   replace: true
   template: "<header ng-transclude></header>"
   link: (scope, element, attrs) ->
-    scope.$watch 'award', (award) ->
-      images = award.images
+    images = scope.award.images
 
-      loadImage = (index = 0) ->
-        return if index >= images.length
+    loadImage = (index = 0) ->
+      return if index >= images.length
 
-        imageObj = new Image
-        imageObj.onload = -> element.prepend(imageObj)
-        imageObj.onerror = -> loadImage(index + 1)
-        imageObj.src = images[index]
+      imageUrl = images[index]
+      if isBroken[imageUrl]
+        loadImage(index + 1)
+        return
 
-      loadImage()
+      imageObj = new Image
+      imageObj.onload = -> element.prepend(this)
+      imageObj.onerror = ->
+        isBroken[@src] = true
+        loadImage(index + 1)
+      imageObj.src = imageUrl
+
+    loadImage()
