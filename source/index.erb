@@ -64,7 +64,7 @@ id: "index"
     <h2 class="headline">Awards</h2>
     <ul class="awards-list">
       <li ng-repeat="award in filteredAwards" class="award is-category-{{ award.category }}">
-        <a href="http://www.energyglobe.at/{{ award.details_link }}">
+        <a href="http://www.energyglobe.at{{ award.details_link }}" target="_blank">
           <award-header award="award">
             <span class="category" ng-bind="award.category | translateCategory"></span>
           </award-header>
